@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+/* Tailwind CSS 4 Theme Configuration */
+@theme {
+  /* Brand Colors */
+  --color-primary-purple: #682cb3;
+  --color-primary-blue: #0300ff;
+  --color-secondary-green: #1eff00;
+  --color-neutral-dark: #222222;
+  
+  /* Font Families */
+  --font-family-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-family-serif: 'Georgia', 'Times New Roman', serif;
+  --font-family-display: 'Inter', system-ui, sans-serif;
+}
+
+/* Base Styles */
+body {
+  @apply bg-white text-neutral-dark;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-[family:var(--font-family-display)] font-bold;
+}
+
+/* Custom Component Styles */
+.btn-primary {
+  @apply bg-primary-purple text-white px-8 py-4 rounded-lg font-semibold 
+         hover:bg-primary-blue transition-all duration-300 
+         shadow-lg hover:shadow-xl transform hover:scale-105;
+}
+
+.btn-secondary {
+  @apply bg-white text-primary-purple border-2 border-primary-purple 
+         px-8 py-4 rounded-lg font-semibold 
+         hover:bg-primary-purple hover:text-white transition-all duration-300;
+}
+
+.section-padding {
+  @apply py-20 px-4 md:px-8 lg:px-16;
+}
+
+.container-custom {
+  @apply max-w-7xl mx-auto;
+}
+
+.gradient-text {
+  @apply bg-gradient-to-r from-primary-purple to-primary-blue 
+         bg-clip-text text-transparent;
+}
+
+.card-hover {
+  @apply transition-all duration-300 hover:shadow-2xl hover:-translate-y-2;
+}
+
+/* Custom Utilities */
+.animation-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animation-delay-400 {
+  animation-delay: 400ms;
+}
