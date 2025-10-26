@@ -9,8 +9,48 @@ import {
   CheckCircle,
   Star
 } from 'lucide-react';
+import Carousel from '@/src/components/Carousel';
 
 export default function HomePage() {
+  const carouselSlides = [
+    {
+      image: '/images/carousel1.jpg',
+      title: 'Nassau\'s Premier Event Equipment Rental Company',
+      subtitle: 'Professional audio, lighting, and staging solutions for unforgettable concerts and festivals',
+      cta: {
+        text: 'Get Your Free Quote',
+        href: '/contact',
+      },
+    },
+    {
+      image: '/images/carousel2.jpg',
+      title: 'Make Your Wedding Day Magical',
+      subtitle: 'Transform your special day with stunning lighting, crystal-clear sound, and elegant décor',
+      cta: {
+        text: 'Plan Your Wedding',
+        href: '/contact',
+      },
+    },
+    {
+      image: '/images/carousel3.jpg',
+      title: 'Celebrate Life\'s Special Moments',
+      subtitle: 'From baby showers to birthdays, we bring joy to every celebration',
+      cta: {
+        text: 'Book Your Event',
+        href: '/contact',
+      },
+    },
+    {
+      image: '/images/carousel4.jpg',
+      title: 'Elevate Your Corporate Events',
+      subtitle: 'Impress clients and inspire teams with world-class AV solutions',
+      cta: {
+        text: 'Discover Solutions',
+        href: '/contact',
+      },
+    },
+  ];
+
   const packages = [
     {
       name: 'Bronze',
@@ -55,21 +95,25 @@ export default function HomePage() {
       icon: Mic,
       title: 'Professional Audio',
       description: 'RCF Line Arrays, Double 18" Subs, Stage Monitors, and Wireless Microphones',
+      image: '/images/carousel2.jpg',
     },
     {
       icon: Lightbulb,
       title: 'Premium Lighting',
       description: '50 Wireless Uplights, Intelligent Beam/Wash Lights, LED Panels, and Lasers',
+      image: '/images/carousel2.jpg',
     },
     {
       icon: Music,
       title: 'Staging & Truss',
       description: 'Professional staging up to 32x32, Full truss rigging systems, and VIP sections',
+      image: '/images/carousel2.jpg',
     },
     {
       icon: Users,
       title: 'Event Furniture',
       description: 'Tables, chairs, cocktail setups, dance floors, and portable bars',
+      image: '/images/carousel2.jpg',
     },
   ];
 
@@ -103,57 +147,26 @@ export default function HomePage() {
 
   return (
     <>
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary-purple via-primary-blue to-neutral-dark">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }} />
-        </div>
+      {/* Hero Section with Carousel */}
+      <Carousel slides={carouselSlides} />
 
-        <div className="container-custom text-center text-white relative z-10 pt-24">
-          <div className="animate-fadeIn">
-            <h1 className="text-5xl md:text-7xl font-display font-bold mb-6">
-              Transform Your Event<br />
-              Into An <span className="text-secondary-green">Unforgettable</span> Experience
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-gray-200">
-              Nassau's premier event equipment rental company. Professional audio, lighting, 
-              and staging solutions for weddings, concerts, and corporate events.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Link href="/contact" className="btn-primary bg-secondary-green hover:bg-white hover:text-primary-purple">
-                Get Your Free Quote
-              </Link>
-              <Link href="/about" className="btn-secondary bg-white/10 border-white text-white hover:bg-white hover:text-primary-purple backdrop-blur-sm">
-                Learn More
-              </Link>
-            </div>
-          </div>
-
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20">
+      {/* Stats Section */}
+      <section className="section-padding bg-white -mt-20 relative z-20">
+        <div className="container-custom">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 bg-white rounded-2xl shadow-2xl p-8">
             {stats.map((stat, index) => (
-              <div key={index} className="animate-fadeIn" style={{ animationDelay: `${index * 100}ms` }}>
-                <div className="text-4xl md:text-5xl font-display font-bold text-secondary-green mb-2">
+              <div key={index} className="text-center">
+                <div className="text-4xl md:text-5xl font-display font-bold text-primary-purple mb-2">
                   {stat.number}
                 </div>
-                <div className="text-sm md:text-base text-gray-300">{stat.label}</div>
+                <div className="text-sm md:text-base text-gray-600">{stat.label}</div>
               </div>
             ))}
           </div>
         </div>
-
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-white rounded-full flex items-start justify-center p-2">
-            <div className="w-1 h-3 bg-white rounded-full" />
-          </div>
-        </div>
       </section>
 
-      {/* Why Choose Us Section */}
+      {/* Why Choose Us Section with Images */}
       <section className="section-padding bg-gray-50">
         <div className="container-custom">
           <div className="text-center mb-16">
@@ -165,17 +178,30 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 gap-8">
             {equipment.map((item, index) => (
               <div 
                 key={index}
-                className="bg-white p-8 rounded-xl shadow-lg card-hover"
+                className="bg-white rounded-2xl shadow-lg overflow-hidden card-hover"
               >
-                <div className="w-16 h-16 bg-gradient-to-br from-primary-purple to-primary-blue rounded-lg flex items-center justify-center mb-6">
-                  <item.icon size={32} className="text-white" />
+                <div className="grid md:grid-cols-2 gap-6">
+                  {/* Image Section */}
+                  <div className="relative h-64 md:h-full bg-gradient-to-br from-primary-purple to-primary-blue flex items-center justify-center">
+                    <div className="text-center text-white p-6">
+                      <item.icon size={64} className="mx-auto mb-4" />
+                      <p className="text-sm opacity-80">{item.image}</p>
+                    </div>
+                  </div>
+
+                  {/* Content Section */}
+                  <div className="p-6 flex flex-col justify-center">
+                    <div className="w-12 h-12 bg-gradient-to-br from-primary-purple to-primary-blue rounded-lg flex items-center justify-center mb-4">
+                      <item.icon size={24} className="text-white" />
+                    </div>
+                    <h3 className="text-2xl font-display font-bold mb-3">{item.title}</h3>
+                    <p className="text-gray-600 leading-relaxed">{item.description}</p>
+                  </div>
                 </div>
-                <h3 className="text-xl font-display font-bold mb-3">{item.title}</h3>
-                <p className="text-gray-600">{item.description}</p>
               </div>
             ))}
           </div>
