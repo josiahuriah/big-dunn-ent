@@ -20,6 +20,10 @@ interface CarouselProps {
   autoPlayInterval?: number;
 }
 
+function cn(...classes: (string | boolean | undefined)[]) {
+  return classes.filter(Boolean).join(" ")
+}
+
 export default function Carousel({ slides, autoPlayInterval = 5000 }: CarouselProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
@@ -28,9 +32,9 @@ export default function Carousel({ slides, autoPlayInterval = 5000 }: CarouselPr
     setCurrentSlide((prev) => (prev + 1) % slides.length);
   }, [slides.length]);
 
-  const prevSlide = () => {
+  const prevSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-  };
+  }, [slides.length]);
 
   const goToSlide = (index: number) => {
     setCurrentSlide(index);
@@ -45,44 +49,46 @@ export default function Carousel({ slides, autoPlayInterval = 5000 }: CarouselPr
   }, [isAutoPlaying, nextSlide, autoPlayInterval]);
 
   return (
-    <div className="relative w-full h-screen overflow-hidden">
+    <div className="relative h-screen w-full overflow-hidden bg-black">
       {/* Slides */}
       {slides.map((slide, index) => (
         <div
           key={index}
-          className={`absolute inset-0 transition-opacity duration-1000 ${
-            index === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0'
-          }`}
+          className={cn(
+            "absolute inset-0 transition-opacity duration-1000",
+            index === currentSlide ? "opacity-100" : "opacity-0"
+          )}
         >
-          {/* Background Image using Next.js Image */}
-          <Image
-            src={slide.image}
-            alt={slide.title}
-            fill
-            priority={index === 0}
-            className="object-cover"
-            sizes="100vw"
-            quality={90}
-          />
-
-          {/* Overlay Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent z-[1]" />
+          {/* Background Image */}
+          <div className="absolute inset-0">
+            <Image
+              src={slide.image}
+              alt={slide.title}
+              fill
+              className="object-cover"
+              priority={index === 0}
+            />
+            {/* Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
+          </div>
 
           {/* Content */}
-          <div className="relative h-full flex items-center justify-center text-white z-[2]">
-            <div className="container-custom text-center px-4 animate-fadeIn">
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-6 drop-shadow-2xl">
-                {slide.title}
-              </h1>
-              <p className="text-xl md:text-2xl lg:text-3xl mb-8 max-w-4xl mx-auto text-gray-100 drop-shadow-lg">
-                {slide.subtitle}
-              </p>
-              <Link
-                href={slide.cta.href}
-                className="inline-block btn-primary bg-secondary-green hover:bg-white hover:text-primary-purple text-lg px-10 py-5"
-              >
-                {slide.cta.text}
-              </Link>
+          <div className="relative h-full">
+            <div className="container-custom h-full flex items-center">
+              <div className="max-w-2xl space-y-6 text-white">
+                <h1 className="text-5xl md:text-7xl font-display font-bold leading-tight">
+                  {slide.title}
+                </h1>
+                <p className="text-xl md:text-2xl text-gray-200">
+                  {slide.subtitle}
+                </p>
+                <Link
+                  href={slide.cta.href}
+                  className="inline-block bg-secondary-green hover:bg-primary-purple text-neutral-dark hover:text-white font-semibold text-lg px-8 py-4 rounded-lg transition-all duration-300 shadow-lg transform hover:scale-105"
+                >
+                  {slide.cta.text}
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -90,31 +96,38 @@ export default function Carousel({ slides, autoPlayInterval = 5000 }: CarouselPr
 
       {/* Navigation Arrows */}
       <button
-        onClick={prevSlide}
-        className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-[30] bg-white/20 backdrop-blur-sm hover:bg-white/40 text-white p-3 rounded-full transition-all duration-300 hover:scale-110"
+        onClick={() => {
+          prevSlide()
+          setIsAutoPlaying(false)
+        }}
+        className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors z-10"
         aria-label="Previous slide"
       >
-        <ChevronLeft size={32} />
+        <ChevronLeft className="w-6 h-6" />
       </button>
       <button
-        onClick={nextSlide}
-        className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-[30] bg-white/20 backdrop-blur-sm hover:bg-white/40 text-white p-3 rounded-full transition-all duration-300 hover:scale-110"
+        onClick={() => {
+          nextSlide()
+          setIsAutoPlaying(false)
+        }}
+        className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors z-10"
         aria-label="Next slide"
       >
-        <ChevronRight size={32} />
+        <ChevronRight className="w-6 h-6" />
       </button>
 
-      {/* Dots Navigation */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-[30] flex space-x-3">
+      {/* Dots Indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-10">
         {slides.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+            className={cn(
+              "h-2 rounded-full transition-all",
               index === currentSlide
-                ? 'bg-secondary-green w-8'
-                : 'bg-white/50 hover:bg-white/80'
-            }`}
+                ? "bg-secondary-green w-8"
+                : "bg-white/50 hover:bg-white/70 w-2"
+            )}
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}

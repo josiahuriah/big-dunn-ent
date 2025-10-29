@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Target, Heart, Award, Users, Zap, Shield } from 'lucide-react';
+import Image from 'next/image';
 
 export const metadata = {
   title: 'About Us - Big Dunn Entertainment | Nassau Event Equipment Experts',
@@ -123,10 +124,11 @@ export default function AboutPage() {
               <div className="aspect-square bg-gradient-to-br from-primary-purple to-primary-blue rounded-2xl flex items-center justify-center text-white">
                 <div className="text-center p-8">
                   <Users size={80} className="mx-auto mb-4" />
-                  <p className="text-2xl font-display font-bold">Company Image</p>
-                  <p className="text-gray-200 mt-2">
-                    [Image: Team photo or event setup showcasing equipment]
-                  </p>
+                  <Image 
+                    src="/images/team.jpg"
+                    alt="Big Dunn Entertainment"
+                    fill
+                    />
                 </div>
               </div>
               <div className="absolute -bottom-6 -right-6 bg-secondary-green text-neutral-dark p-6 rounded-xl shadow-xl">
@@ -260,7 +262,11 @@ export default function AboutPage() {
                 <div className="text-center text-white">
                   <Users size={80} className="mx-auto mb-4" />
                   <p className="text-xl font-display font-bold">Glenn Williams Jr.</p>
-                  <p className="text-gray-200 mt-2">[Professional Photo]</p>
+                  <Image
+                    src='/images/glenn.jpg'
+                    alt="Founder"
+                    fill
+                  />
                 </div>
               </div>
 

@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { Menu, X, Phone } from 'lucide-react';
+import Image from 'next/image';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,18 +20,24 @@ export default function Header() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <div className="w-12 h-12 bg-primary-purple rounded-lg flex items-center justify-center">
+            <div className="w-36 h-12 rounded-lg flex items-center justify-center">
               {/* Logo placeholder - replace with actual logo image */}
-              <span className="text-white font-bold text-xl">BD</span>
+              <Image
+              src="/images/logo-long.png"
+              alt="Big Dunn Entertainment"
+              width={1200}
+              height={200}
+              className="h-10 w-auto"
+            />
             </div>
-            <div className="hidden md:block">
+            {/* <div className="hidden md:block">
               <div className="font-display text-xl font-bold text-neutral-dark">
                 BIG DUNN
               </div>
               <div className="text-xs text-primary-purple font-serif">
                 ENTERTAINMENT
               </div>
-            </div>
+            </div> */}
           </Link>
 
           {/* Desktop Navigation */}

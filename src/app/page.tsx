@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { 
   Music, 
   Lightbulb, 
@@ -95,25 +96,25 @@ export default function HomePage() {
       icon: Mic,
       title: 'Professional Audio',
       description: 'RCF Line Arrays, Double 18" Subs, Stage Monitors, and Wireless Microphones',
-      image: '/images/carousel2.jpg',
+      image: '/images/speakers.jpg',
     },
     {
       icon: Lightbulb,
       title: 'Premium Lighting',
       description: '50 Wireless Uplights, Intelligent Beam/Wash Lights, LED Panels, and Lasers',
-      image: '/images/carousel2.jpg',
+      image: '/images/lights.jpg',
     },
     {
       icon: Music,
       title: 'Staging & Truss',
       description: 'Professional staging up to 32x32, Full truss rigging systems, and VIP sections',
-      image: '/images/carousel2.jpg',
+      image: '/images/truss.jpg',
     },
     {
       icon: Users,
       title: 'Event Furniture',
-      description: 'Tables, chairs, cocktail setups, dance floors, and portable bars',
-      image: '/images/carousel2.jpg',
+      description: 'Tables, chairs, cocktail setups, table linen, dance floors, and portable bars',
+      image: '/images/cocktail.jpg',
     },
   ];
 
@@ -121,7 +122,7 @@ export default function HomePage() {
     { number: '500+', label: 'Events Completed' },
     { number: '10+', label: 'Years Experience' },
     { number: '100+', label: 'Equipment Items' },
-    { number: '98%', label: 'Client Satisfaction' },
+    { number: '100%', label: 'Client Satisfaction' },
   ];
 
   const testimonials = [
@@ -189,7 +190,13 @@ export default function HomePage() {
                   <div className="relative h-64 md:h-full bg-gradient-to-br from-primary-purple to-primary-blue flex items-center justify-center">
                     <div className="text-center text-white p-6">
                       <item.icon size={64} className="mx-auto mb-4" />
-                      <p className="text-sm opacity-80">{item.image}</p>
+                      {/* <p className="text-sm opacity-80"> */}
+                        <Image
+                          src={item.image}
+                          alt={item.title}
+                          fill
+                              />
+                        {/* </p> */}
                     </div>
                   </div>
 
