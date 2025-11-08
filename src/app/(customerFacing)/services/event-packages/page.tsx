@@ -12,7 +12,7 @@ export default function EventPackagesPage() {
     {
       name: 'Core Package',
       price: '$5,170.00',
-      image: '/images/event-core.jpg',
+      image: '/images/event-core.jpeg',
       features: [
         '3 Stage Monitors',
         '6 Line Arrays',
@@ -31,7 +31,7 @@ export default function EventPackagesPage() {
     {
       name: 'Prime Package',
       price: '$6,780.00',
-      image: '/images/event-prime.jpg',
+      image: '/images/event-prime.jpeg',
       features: [
         '4 Stage Monitors',
         '8 Line Arrays',
@@ -51,7 +51,7 @@ export default function EventPackagesPage() {
     {
       name: 'Premium Package',
       price: '$9,095.00',
-      image: '/images/event-premium.jpg',
+      image: '/images/event-premium.jpeg',
       features: [
         '5 Stage Monitors',
         '12 Line Arrays',
@@ -71,7 +71,7 @@ export default function EventPackagesPage() {
     {
       name: 'Elite Package',
       price: '$16,000.00',
-      image: '/images/event-elite.jpg',
+      image: '/images/event-elite.jpeg',
       features: [
         '5 Stage Monitors',
         '16 Line Arrays',

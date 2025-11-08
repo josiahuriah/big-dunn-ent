@@ -5,7 +5,8 @@
   /* Brand Colors */
   --color-primary-purple: #682cb3;
   --color-primary-blue: #0300ff;
-  --color-secondary-green: #1eff00;
+  --color-secondary-green: #0300ff;
+  /* --color-secondary-green: #1eff00; - changed to blue */
   --color-neutral-dark: #222222;
   
   /* Font Families */

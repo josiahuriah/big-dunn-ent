@@ -8,9 +8,10 @@ import {
   Award, 
   Clock,
   CheckCircle,
-  Star
 } from 'lucide-react';
 import Carousel from '@/src/components/Carousel';
+import EmailSubscriptionModal from '@/src/components/EmailSubscriptionModal';
+import ReviewForm from '@/src/components/ReviewForm';
 
 export default function HomePage() {
   const carouselSlides = [
@@ -125,29 +126,11 @@ export default function HomePage() {
     { number: '100%', label: 'Client Satisfaction' },
   ];
 
-  const testimonials = [
-    {
-      name: 'Sarah Johnson',
-      event: 'Wedding Reception',
-      rating: 5,
-      text: 'Big Dunn Entertainment made our wedding absolutely magical! The lighting was stunning and the sound quality was impeccable.',
-    },
-    {
-      name: 'Michael Chen',
-      event: 'Corporate Event',
-      rating: 5,
-      text: 'Professional, reliable, and top-tier equipment. They handled our corporate gala flawlessly.',
-    },
-    {
-      name: 'Jennifer Williams',
-      event: 'Concert Production',
-      rating: 5,
-      text: 'Their concert package exceeded all expectations. The stage setup was world-class!',
-    },
-  ];
-
   return (
     <>
+      {/* Email Subscription Modal */}
+      <EmailSubscriptionModal />
+
       {/* Hero Section with Carousel */}
       <Carousel slides={carouselSlides} />
 
@@ -190,13 +173,12 @@ export default function HomePage() {
                   <div className="relative h-64 md:h-full bg-gradient-to-br from-primary-purple to-primary-blue flex items-center justify-center">
                     <div className="text-center text-white p-6">
                       <item.icon size={64} className="mx-auto mb-4" />
-                      {/* <p className="text-sm opacity-80"> */}
-                        <Image
-                          src={item.image}
-                          alt={item.title}
-                          fill
-                              />
-                        {/* </p> */}
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        fill
+                        className="object-cover"
+                      />
                     </div>
                   </div>
 
@@ -304,39 +286,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="section-padding bg-gradient-to-br from-primary-purple to-primary-blue text-white">
-        <div className="container-custom">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-              What Our Clients Say
-            </h2>
-            <p className="text-xl text-gray-200 max-w-2xl mx-auto">
-              Don't just take our word for it - hear from our satisfied clients
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <div 
-                key={index}
-                className="bg-white/10 backdrop-blur-sm p-8 rounded-xl card-hover"
-              >
-                <div className="flex mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} size={20} className="text-secondary-green fill-secondary-green" />
-                  ))}
-                </div>
-                <p className="text-gray-100 mb-6 italic">"{testimonial.text}"</p>
-                <div>
-                  <div className="font-bold">{testimonial.name}</div>
-                  <div className="text-sm text-gray-300">{testimonial.event}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Review Form Section - Replaces Testimonials */}
+      <ReviewForm />
 
       {/* CTA Section */}
       <section className="section-padding bg-secondary-green">

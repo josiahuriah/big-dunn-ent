@@ -84,7 +84,7 @@ export default function Carousel({ slides, autoPlayInterval = 5000 }: CarouselPr
                 </p>
                 <Link
                   href={slide.cta.href}
-                  className="inline-block bg-secondary-green hover:bg-primary-purple text-neutral-dark hover:text-white font-semibold text-lg px-8 py-4 rounded-lg transition-all duration-300 shadow-lg transform hover:scale-105"
+                  className="inline-block bg-secondary-green hover:bg-primary-purple text-neutral-white hover:text-white font-semibold text-lg px-8 py-4 rounded-lg transition-all duration-300 shadow-lg transform hover:scale-105"
                 >
                   {slide.cta.text}
                 </Link>

@@ -14,7 +14,7 @@ export default function WeddingPackagesPage() {
       name: 'Bronze',
       price: '$250',
       setupFee: 'Setup fee not included',
-      image: '/images/wedding-bronze.jpg',
+      image: '/images/wedding-bronze.jpeg',
       features: [
         '8 Uplights',
         'OR',
@@ -27,7 +27,7 @@ export default function WeddingPackagesPage() {
       name: 'Iron',
       price: '$500',
       setupFee: 'Setup fee not included',
-      image: '/images/wedding-iron.jpg',
+      image: '/images/wedding-iron.jpeg',
       features: [
         'DJ Services - 4 hours',
         'Sound System Included',
@@ -39,7 +39,7 @@ export default function WeddingPackagesPage() {
       name: 'Rhenium',
       price: '$650',
       setupFee: 'Setup fee not included',
-      image: '/images/wedding-rhenium.jpg',
+      image: '/images/wedding-rhenium.jpeg',
       features: [
         'DJ Services',
         '8 Uplights',
@@ -54,7 +54,7 @@ export default function WeddingPackagesPage() {
       name: 'Silver',
       price: '$750',
       setupFee: 'Setup fee not included',
-      image: '/images/wedding-silver.jpg',
+      image: '/images/wedding-silver.jpeg',
       features: [
         '8 Uplights',
         '8 Head table & Backdrop Lights',
@@ -67,7 +67,7 @@ export default function WeddingPackagesPage() {
       name: 'Palladium',
       price: '$800',
       setupFee: 'Setup fee not included',
-      image: '/images/wedding-palladium.jpg',
+      image: '/images/wedding-palladium.jpeg',
       features: [
         '1 Custom Animated Monogram',
         'Intelligent Light',
@@ -82,7 +82,7 @@ export default function WeddingPackagesPage() {
       name: 'Ruthenium',
       price: '$1,100',
       setupFee: 'Setup fee not included',
-      image: '/images/wedding-ruthenium.jpg',
+      image: '/images/wedding-ruthenium.jpeg',
       features: [
         'DJ Services',
         '6 Uplights',
@@ -98,7 +98,7 @@ export default function WeddingPackagesPage() {
       name: 'Gold',
       price: '$1,300',
       setupFee: 'Setup fee included',
-      image: '/images/wedding-gold.jpg',
+      image: '/images/wedding-gold.jpeg',
       features: [
         'DJ Services',
         'Custom Gobo Heart or Rings',
@@ -116,7 +116,7 @@ export default function WeddingPackagesPage() {
       name: 'Platinum',
       price: '$1,500',
       setupFee: 'Setup fee included',
-      image: '/images/wedding-platinum.jpg',
+      image: '/images/wedding-platinum.jpeg',
       features: [
         '1 Custom Animated Monogram',
         'Intelligent Light',
@@ -133,7 +133,7 @@ export default function WeddingPackagesPage() {
       name: 'Rhodium',
       price: '$2,000',
       setupFee: 'Setup fee included',
-      image: '/images/wedding-rhodium.jpg',
+      image: '/images/wedding-rhodium.jpeg',
       features: [
         '1 Custom Monogram',
         '1 Intelligent Light',
@@ -152,7 +152,7 @@ export default function WeddingPackagesPage() {
       name: 'Exclusive Plus',
       price: '$2,800',
       setupFee: 'Setup fee included',
-      image: '/images/wedding-exclusive.jpg',
+      image: '/images/wedding-exclusive.jpeg',
       features: [
         'DJ Services & Sound',
         '(2) Custom Monograms',

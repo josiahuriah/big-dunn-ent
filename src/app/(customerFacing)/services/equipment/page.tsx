@@ -24,7 +24,7 @@ export default function EquipmentPage() {
     {
       name: 'RCF - Double 18" Subs',
       quantity: '12 Passive',
-      image: '/images/equipment/subs.jpg',
+      image: '/images/equipment/subs.jpeg',
       description: 'Powerful subwoofers for deep, impactful bass',
     },
     {
@@ -36,7 +36,7 @@ export default function EquipmentPage() {
     {
       name: 'QSC - Monitor',
       quantity: '4 Stage Monitors',
-      image: '/images/equipment/qsc-monitor.jpg',
+      image: '/images/equipment/qsc-monitor.jpeg',
       description: 'High-quality QSC stage monitoring systems',
     },
     {
@@ -48,7 +48,7 @@ export default function EquipmentPage() {
     {
       name: 'Pioneer DJ Controllers',
       quantity: '5',
-      image: '/images/equipment/dj-controller.jpg',
+      image: '/images/equipment/dj-controller.png',
       description: 'Professional DJ controllers and mixing equipment',
     },
   ];
@@ -81,7 +81,7 @@ export default function EquipmentPage() {
     {
       name: 'Waterproof Par Lights',
       quantity: '16',
-      image: '/images/equipment/par-lights.jpg',
+      image: '/images/equipment/par-lights.jpeg',
       description: 'Weather-resistant PAR lights for outdoor events',
     },
     {
@@ -93,7 +93,7 @@ export default function EquipmentPage() {
     {
       name: 'Projectors',
       quantity: '3',
-      image: '/images/equipment/projectors.jpg',
+      image: '/images/equipment/projectors.jpeg',
       description: 'High-lumen projectors for large-scale displays',
     },
     {
@@ -114,7 +114,7 @@ export default function EquipmentPage() {
     {
       name: 'Trussing System',
       quantity: '30x30 ft Full Rig',
-      image: '/images/equipment/truss.jpg',
+      image: '/images/equipment/truss.jpeg',
       description: 'Professional aluminum truss rigging systems',
     },
     {
@@ -147,7 +147,7 @@ export default function EquipmentPage() {
     {
       name: 'Cocktail Chairs',
       quantity: '24',
-      image: '/images/equipment/cocktail-chairs.jpg',
+      image: '/images/equipment/cocktail-chair.jpg',
       description: 'High chairs for cocktail table seating',
     },
     {
@@ -171,7 +171,7 @@ export default function EquipmentPage() {
     {
       name: 'LED Flat Screens',
       quantity: '2 (75")',
-      image: '/images/equipment/flat-screens.jpg',
+      image: '/images/equipment/flat-screen.jpg',
       description: 'Large format displays for presentations',
     },
   ];
@@ -269,7 +269,7 @@ export default function EquipmentPage() {
 
         <div className="container-custom text-center text-white relative z-10 pt-24">
           <h1 className="text-5xl md:text-7xl font-display font-bold mb-6">
-            Equipment <span className="text-secondary-green">Inventory</span>
+            Equipment Inventory
           </h1>
           <p className="text-xl md:text-2xl max-w-3xl mx-auto text-gray-200 mb-8">
             Browse our comprehensive collection of professional-grade audio, lighting, 
