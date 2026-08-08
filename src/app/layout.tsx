@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Michroma, Montserrat } from "next/font/google";
-// @ts-ignore: side-effect global CSS import handled by Next.js
 import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
