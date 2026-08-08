@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 interface CarouselSlide {
@@ -88,24 +88,6 @@ export default function Carousel({ slides, autoPlayInterval = 6000 }: CarouselPr
           </div>
         </div>
       </div>
-
-      {/* Arrows */}
-      <button
-        onClick={() => go(current - 1)}
-        aria-label="Previous slide"
-        className="absolute left-6 top-1/2 -translate-y-1/2 z-[6] w-[52px] h-[52px] rounded-full flex items-center justify-center text-white transition-all hover:!bg-purple hover:!border-purple"
-        style={{ border: '1px solid rgba(255,255,255,0.25)', background: 'rgba(16,12,28,0.35)', backdropFilter: 'blur(4px)' }}
-      >
-        <ChevronLeft size={20} />
-      </button>
-      <button
-        onClick={() => go(current + 1)}
-        aria-label="Next slide"
-        className="absolute right-6 top-1/2 -translate-y-1/2 z-[6] w-[52px] h-[52px] rounded-full flex items-center justify-center text-white transition-all hover:!bg-purple hover:!border-purple"
-        style={{ border: '1px solid rgba(255,255,255,0.25)', background: 'rgba(16,12,28,0.35)', backdropFilter: 'blur(4px)' }}
-      >
-        <ChevronRight size={20} />
-      </button>
 
       {/* Dots */}
       <div className="absolute bottom-[38px] left-0 right-0 z-[6] max-w-[1240px] mx-auto px-6 flex gap-3">

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Mic, Lightbulb, Layers, Armchair, Medal, Clock, BadgeCheck, CheckCircle, Phone } from 'lucide-react';
+import { Medal, Clock, BadgeCheck, CheckCircle, Phone } from 'lucide-react';
 import Carousel from '@/src/components/Carousel';
 import EmailSubscriptionModal from '@/src/components/EmailSubscriptionModal';
 import ReviewForm from '@/src/components/ReviewForm';
@@ -44,10 +44,10 @@ export default function HomePage() {
   ];
 
   const equipment = [
-    { Icon: Mic, title: 'Professional Audio', description: 'RCF Line Arrays, Double 18" Subs, Stage Monitors, and Wireless Microphones.', image: '/images/speakers.jpg' },
-    { Icon: Lightbulb, title: 'Premium Lighting', description: '50 Wireless Uplights, Intelligent Beam/Wash Lights, LED Panels, and Lasers.', image: '/images/lights.jpg' },
-    { Icon: Layers, title: 'Staging & Truss', description: 'Professional staging up to 32x32, full truss rigging systems, and VIP sections.', image: '/images/truss.jpg' },
-    { Icon: Armchair, title: 'Event Furniture', description: 'Tables, chairs, cocktail setups, linens, dance floors, and portable bars.', image: '/images/cocktail.jpg' },
+    { title: 'Professional Audio', description: 'RCF Line Arrays, Double 18" Subs, Stage Monitors, and Wireless Microphones.', image: '/images/speakers.jpg' },
+    { title: 'Premium Lighting', description: '50 Wireless Uplights, Intelligent Beam/Wash Lights, LED Panels, and Lasers.', image: '/images/lights.jpg' },
+    { title: 'Staging & Truss', description: 'Professional staging up to 32x32, full truss rigging systems, and VIP sections.', image: '/images/truss.jpg' },
+    { title: 'Event Furniture', description: 'Tables, chairs, cocktail setups, linens, dance floors, and portable bars.', image: '/images/cocktail.jpg' },
   ];
 
   const benefits = [
@@ -57,7 +57,7 @@ export default function HomePage() {
   ];
 
   const packages = [
-    { name: 'Bronze', price: '$250', popular: false, features: ['8 Uplights or 1 Static Monogram'], headBg: 'linear-gradient(135deg,#2a2436,#3a3348)' },
+    { name: 'Bronze', price: '$250', popular: false, features: ['8 Uplights or 1 Static Monogram'], headBg: 'linear-gradient(135deg,#6f3d1d,#cd7f32)' },
     { name: 'Iron', price: '$500', popular: false, features: ['DJ Services – 4 hrs', 'Sound System Included'], headBg: 'linear-gradient(135deg,#3a3348,#4a4360)' },
     { name: 'Rhenium', price: '$650', popular: true, features: ['DJ Services', '8 Uplights', '1 Fog Machine', 'Sound System'], headBg: 'linear-gradient(135deg,#6a26c9,#2f39e8)' },
     { name: 'Gold', price: '$1,300', popular: false, features: ['DJ Services', 'Custom Gobo Heart/Rings', 'Fog Machine', 'Custom Monogram', '8 Aerial Lights', '8 Uplights', 'Gold Microphone'], headBg: 'linear-gradient(135deg,#b8860b,#e0b024)' },
@@ -112,12 +112,6 @@ export default function HomePage() {
                   style={{ backgroundImage: `url('${item.image}')`, backgroundSize: 'cover', backgroundPosition: 'center' }}
                 >
                   <div className="absolute inset-0" style={{ background: 'linear-gradient(160deg,rgba(106,38,201,0.35),rgba(16,12,28,0.55))' }} />
-                  <div
-                    className="absolute top-4 left-4 w-11 h-11 rounded-xl flex items-center justify-center text-white"
-                    style={{ background: 'rgba(255,255,255,0.16)', backdropFilter: 'blur(6px)', border: '1px solid rgba(255,255,255,0.3)' }}
-                  >
-                    <item.Icon size={22} />
-                  </div>
                 </div>
                 <div className="px-6 py-7 flex flex-col justify-center">
                   <h3 className="bd-display text-ink text-[16px] leading-[1.3] m-0 mb-3">{item.title}</h3>
@@ -220,7 +214,7 @@ export default function HomePage() {
       <ReviewForm />
 
       {/* CTA */}
-      <section className="bg-white px-6 pb-24">
+      <section className="bg-white px-6 py-24">
         <div className="max-w-[1240px] mx-auto bd-cta-band px-12 py-[72px] text-center">
           <div className="relative">
             <h2 className="bd-display text-white m-0 mb-[18px]" style={{ fontSize: 'clamp(24px,3vw,40px)', lineHeight: 1.2 }}>

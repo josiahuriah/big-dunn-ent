@@ -47,7 +47,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`scroll-smooth ${michroma.variable} ${montserrat.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`scroll-smooth ${michroma.variable} ${montserrat.variable}`}>
       <body className="antialiased">
         <Header />
         <main className="min-h-screen">
