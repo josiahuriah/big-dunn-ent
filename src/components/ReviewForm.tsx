@@ -18,38 +18,22 @@ export default function ReviewForm() {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
     try {
       const response = await fetch('/api/reviews', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
-
       if (response.ok) {
         setSubmitStatus('success');
-        setFormData({
-          name: '',
-          email: '',
-          eventType: '',
-          rating: 0,
-          review: '',
-          suggestions: '',
-        });
-        
-        // Reset success message after 5 seconds
-        setTimeout(() => setSubmitStatus('idle'), 5000);
+        setFormData({ name: '', email: '', eventType: '', rating: 0, review: '', suggestions: '' });
+        setTimeout(() => setSubmitStatus('idle'), 6000);
       } else {
         setSubmitStatus('error');
         setTimeout(() => setSubmitStatus('idle'), 5000);
@@ -63,113 +47,73 @@ export default function ReviewForm() {
     }
   };
 
-  const eventTypes = [
-    'Wedding',
-    'Concert',
-    'Corporate Event',
-    'Birthday Party',
-    'Festival',
-    'Private Party',
-    'Other',
-  ];
+  const eventTypes = ['Wedding', 'Concert', 'Corporate Event', 'Birthday Party', 'Festival', 'Private Party', 'Other'];
+  const activeRating = hoveredRating || formData.rating;
 
   return (
-    <section className="section-padding bg-gradient-to-br from-primary-purple to-primary-blue text-white">
-      <div className="container-custom">
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full mb-6">
-            <MessageSquare size={40} className="text-secondary-green" />
+    <section className="relative overflow-hidden px-6 py-24" style={{ background: '#100c1c' }}>
+      <div
+        className="absolute pointer-events-none"
+        style={{ top: '-120px', right: '-80px', width: '420px', height: '420px', borderRadius: '50%', background: 'radial-gradient(circle,rgba(106,38,201,0.35),transparent 70%)' }}
+      />
+      <div
+        className="absolute pointer-events-none"
+        style={{ bottom: '-140px', left: '-60px', width: '380px', height: '380px', borderRadius: '50%', background: 'radial-gradient(circle,rgba(47,57,232,0.28),transparent 70%)' }}
+      />
+
+      <div className="relative max-w-[820px] mx-auto">
+        <div className="text-center mb-11">
+          <div
+            className="inline-flex items-center justify-center w-[66px] h-[66px] rounded-[18px] mb-[22px]"
+            style={{ background: 'linear-gradient(135deg,#6a26c9,#2f39e8)', boxShadow: '0 14px 34px rgba(106,38,201,0.4)' }}
+          >
+            <MessageSquare size={30} className="text-white" />
           </div>
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
+          <h2 className="bd-display text-white m-0 mb-4" style={{ fontSize: 'clamp(24px,2.8vw,36px)', lineHeight: 1.2 }}>
             Share Your Experience
           </h2>
-          <p className="text-xl text-gray-200 max-w-2xl mx-auto">
-            We'd love to hear about your event! Your feedback helps us continue 
-            delivering exceptional service.
+          <p className="text-[16px] leading-[1.7] max-w-[520px] mx-auto m-0" style={{ color: '#b6afc9' }}>
+            We&apos;d love to hear about your event. Your feedback helps us keep raising the bar.
           </p>
         </div>
 
-        <div className="max-w-3xl mx-auto">
-          {submitStatus === 'success' && (
-            <div className="bg-secondary-green/10 border-2 border-secondary-green backdrop-blur-sm text-white p-6 rounded-xl mb-8 animate-fadeIn">
-              <h3 className="font-semibold text-xl mb-2 flex items-center gap-2">
-                <Star className="text-secondary-green fill-secondary-green" size={24} />
-                Thank You for Your Feedback!
-              </h3>
-              <p>
-                We appreciate you taking the time to share your experience. Your review 
-                will be reviewed and may be featured on our website.
-              </p>
-            </div>
-          )}
-
-          {submitStatus === 'error' && (
-            <div className="bg-red-500/10 border-2 border-red-300 backdrop-blur-sm text-white p-4 rounded-xl mb-8 animate-fadeIn">
-              <p className="font-semibold">Oops! Something went wrong. Please try again.</p>
-            </div>
-          )}
-
-          <form onSubmit={handleSubmit} className="bg-white/10 backdrop-blur-sm p-8 md:p-12 rounded-2xl shadow-2xl space-y-6">
-            <div className="grid md:grid-cols-2 gap-6">
+        {submitStatus === 'success' ? (
+          <div
+            className="rounded-[16px] p-[26px] text-center animate-fadeIn"
+            style={{ background: 'rgba(47,57,232,0.14)', border: '1px solid rgba(47,57,232,0.4)' }}
+          >
+            <Star size={30} style={{ color: '#8b7fd6' }} fill="#8b7fd6" className="mx-auto" />
+            <h3 className="bd-display text-white text-[18px] mt-3 mb-2">Thank You!</h3>
+            <p className="text-[15px] m-0" style={{ color: '#b6afc9' }}>We appreciate you sharing your experience.</p>
+          </div>
+        ) : (
+          <form
+            onSubmit={handleSubmit}
+            className="rounded-[20px] p-10"
+            style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', backdropFilter: 'blur(6px)' }}
+          >
+            <div className="grid md:grid-cols-2 gap-5 mb-5">
               <div>
-                <label htmlFor="name" className="block text-sm font-semibold mb-2">
-                  Your Name *
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 bg-white/20 backdrop-blur-sm border-2 border-white/30 rounded-lg focus:border-secondary-green focus:outline-none transition-colors text-white placeholder-white/60"
-                  placeholder="John Doe"
-                />
+                <label htmlFor="name" className="bd-label-dark">Your Name</label>
+                <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required className="bd-input-dark" placeholder="John Doe" />
               </div>
-
               <div>
-                <label htmlFor="email" className="block text-sm font-semibold mb-2">
-                  Email Address *
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 bg-white/20 backdrop-blur-sm border-2 border-white/30 rounded-lg focus:border-secondary-green focus:outline-none transition-colors text-white placeholder-white/60"
-                  placeholder="john@example.com"
-                />
+                <label htmlFor="email" className="bd-label-dark">Email Address</label>
+                <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required className="bd-input-dark" placeholder="john@example.com" />
               </div>
             </div>
 
-            <div>
-              <label htmlFor="eventType" className="block text-sm font-semibold mb-2">
-                Event Type *
-              </label>
-              <select
-                id="eventType"
-                name="eventType"
-                value={formData.eventType}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 bg-white/20 backdrop-blur-sm border-2 border-white/30 rounded-lg focus:border-secondary-green focus:outline-none transition-colors text-white"
-              >
-                <option value="" className="text-gray-900">Select event type</option>
-                {eventTypes.map((type) => (
-                  <option key={type} value={type} className="text-gray-900">
-                    {type}
-                  </option>
-                ))}
+            <div className="mb-5">
+              <label htmlFor="eventType" className="bd-label-dark">Event Type</label>
+              <select id="eventType" name="eventType" value={formData.eventType} onChange={handleChange} required className="bd-input-dark">
+                <option value="">Select event type</option>
+                {eventTypes.map((t) => <option key={t} value={t}>{t}</option>)}
               </select>
             </div>
 
-            <div>
-              <label className="block text-sm font-semibold mb-3">
-                Rate Your Experience *
-              </label>
-              <div className="flex gap-2">
+            <div className="mb-5">
+              <label className="bd-label-dark">Rate Your Experience</label>
+              <div className="flex gap-2.5">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <button
                     key={star}
@@ -177,73 +121,62 @@ export default function ReviewForm() {
                     onClick={() => setFormData({ ...formData, rating: star })}
                     onMouseEnter={() => setHoveredRating(star)}
                     onMouseLeave={() => setHoveredRating(0)}
-                    className="transition-transform hover:scale-110"
+                    className="bg-none border-none p-0 cursor-pointer transition-transform hover:scale-110"
                   >
                     <Star
-                      size={40}
-                      className={`${
-                        star <= (hoveredRating || formData.rating)
-                          ? 'text-secondary-green fill-secondary-green'
-                          : 'text-white/40'
-                      } transition-colors`}
+                      size={34}
+                      style={{ color: star <= activeRating ? '#8b7fd6' : 'rgba(255,255,255,0.3)' }}
+                      fill={star <= activeRating ? '#8b7fd6' : 'transparent'}
                     />
                   </button>
                 ))}
               </div>
             </div>
 
-            <div>
-              <label htmlFor="review" className="block text-sm font-semibold mb-2">
-                Tell Us About Your Experience *
-              </label>
+            <div className="mb-5">
+              <label htmlFor="review" className="bd-label-dark">Tell Us About Your Experience</label>
               <textarea
-                id="review"
-                name="review"
-                value={formData.review}
-                onChange={handleChange}
-                required
-                rows={5}
-                className="w-full px-4 py-3 bg-white/20 backdrop-blur-sm border-2 border-white/30 rounded-lg focus:border-secondary-green focus:outline-none transition-colors resize-none text-white placeholder-white/60"
+                id="review" name="review" value={formData.review} onChange={handleChange} required rows={4}
+                className="bd-input-dark resize-none"
                 placeholder="Share what you loved about our service, equipment, and team..."
               />
             </div>
 
-            <div>
-              <label htmlFor="suggestions" className="block text-sm font-semibold mb-2">
-                Any Suggestions for Improvement? (Optional)
-              </label>
+            <div className="mb-6">
+              <label htmlFor="suggestions" className="bd-label-dark">Any Suggestions for Improvement? (Optional)</label>
               <textarea
-                id="suggestions"
-                name="suggestions"
-                value={formData.suggestions}
-                onChange={handleChange}
-                rows={3}
-                className="w-full px-4 py-3 bg-white/20 backdrop-blur-sm border-2 border-white/30 rounded-lg focus:border-secondary-green focus:outline-none transition-colors resize-none text-white placeholder-white/60"
+                id="suggestions" name="suggestions" value={formData.suggestions} onChange={handleChange} rows={3}
+                className="bd-input-dark resize-none"
                 placeholder="Help us serve you better..."
               />
             </div>
 
+            {submitStatus === 'error' && (
+              <div className="mb-5 rounded-[10px] p-3 text-sm text-white" style={{ background: 'rgba(220,38,38,0.14)', border: '1px solid rgba(248,113,113,0.4)' }}>
+                Oops! Something went wrong. Please try again.
+              </div>
+            )}
+
             <button
               type="submit"
               disabled={isSubmitting || formData.rating === 0}
-              className="w-full bg-secondary-green text-neutral-dark px-8 py-4 rounded-lg font-semibold hover:bg-white transition-all duration-300 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="w-full text-white font-bold text-[14px] tracking-[0.04em] uppercase border-none p-4 rounded-[11px] cursor-pointer transition-all hover:-translate-y-0.5 flex items-center justify-center gap-2.5 disabled:opacity-50 disabled:cursor-not-allowed"
+              style={{ background: 'linear-gradient(135deg,#6a26c9,#2f39e8)', boxShadow: '0 14px 34px rgba(106,38,201,0.4)' }}
             >
               {isSubmitting ? (
                 <>
-                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-neutral-dark" />
+                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white" />
                   <span>Submitting...</span>
                 </>
               ) : (
                 <>
-                  <Send size={20} />
+                  <Send size={17} />
                   <span>Submit Review</span>
                 </>
               )}
             </button>
-
-            
           </form>
-        </div>
+        )}
       </div>
     </section>
   );

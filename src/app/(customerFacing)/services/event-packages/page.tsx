@@ -1,348 +1,182 @@
 import Link from 'next/link';
-import Image from 'next/image';
-import { CheckCircle, Phone, Mail, ArrowRight, Music } from 'lucide-react';
+import { CheckCircle, ArrowRight, Music, Phone, Mail } from 'lucide-react';
 
 export const metadata = {
   title: 'Concert & Event Packages - Big Dunn Entertainment | Nassau Event Production',
-  description: 'Professional concert and event production packages for festivals, corporate events, and large-scale celebrations in Nassau, Bahamas.',
+  description:
+    'Professional concert and event production packages for festivals, corporate events, and large-scale celebrations in Nassau, Bahamas.',
 };
 
+const packages = [
+  { id: 'core-package', name: 'Core Package', price: '$5,170', image: '/images/event-core.jpeg', description: 'Essential package for small to medium events and outdoor concerts.', idealFor: 'Corporate events, festivals, community gatherings (up to 500 guests)', features: ['3 Stage Monitors', '6 Line Arrays', '4 Double 18 Subs', 'DJ Controller', '12x12 Stage', '15x15 Trussing Rig', 'Basic Lighting', 'Generator', '2 Wireless Mics', 'Professional Engineer'] },
+  { id: 'prime-package', name: 'Prime Package', price: '$6,780', image: '/images/event-prime.jpeg', description: 'Enhanced setup with covered staging and advanced lighting effects.', idealFor: 'Outdoor festivals, concerts, large private events (500–1,000 guests)', popular: true, features: ['4 Stage Monitors', '8 Line Arrays', '6 Double 18 Subs', 'DJ Controller', '2 Wireless Mics', '20x16 Stage', '20x20 Trussing Rig', '20x20 Tent Cover', 'Advanced Lighting', 'Generator'] },
+  { id: 'premium-package', name: 'Premium Package', price: '$9,095', image: '/images/event-premium.jpeg', description: 'Professional-grade production with LED video wall for maximum impact.', idealFor: 'Major concerts, corporate galas, high-profile events (1,000–2,000 guests)', features: ['5 Stage Monitors', '12 Line Arrays', '8 Double 18 Subs', 'DJ Controller', '20x20 Stage', '20x20 Trussing Rig', 'Advanced Lighting', '8x6 LED Wall', 'Generator', '2 Wireless Mics', 'Professional Engineer'] },
+  { id: 'elite-package', name: 'Elite Package', price: '$16,000', image: '/images/event-elite.jpeg', description: 'Our flagship concert package with full production capabilities.', idealFor: 'Large-scale concerts, festivals, major sporting events (2,000+ guests)', features: ['5 Stage Monitors', '16 Line Arrays', '12 Double 18 Subs', 'DJ Controller', '2 Wireless Mics', '28x28 Stage', '30x30 Trussing Rig', '30x30 Roof', 'Speaker Wings', 'Advanced Lighting', '16x9 LED Wall', 'Generator'] },
+];
+
+const services = [
+  { title: 'Expert Setup', desc: 'Professional installation and sound check by experienced technicians.' },
+  { title: 'On-Site Support', desc: 'Dedicated engineer throughout your event to ensure perfect audio.' },
+  { title: 'Equipment Insurance', desc: 'All equipment fully insured and maintained to the highest standards.' },
+];
+
 export default function EventPackagesPage() {
-  const packages = [
-    {
-      name: 'Core Package',
-      price: '$5,170.00',
-      image: '/images/event-core.jpeg',
-      features: [
-        '3 Stage Monitors',
-        '6 Line Arrays',
-        '4 Double 18 Subs',
-        'DJ Controller',
-        '12x12 Stage',
-        '15x15 Trussing Rig',
-        'Basic Lighting',
-        'Generator',
-        '2 Wireless Mics',
-        'Professional Engineer',
-      ],
-      description: 'Essential package for small to medium events and outdoor concerts',
-      idealFor: 'Corporate events, festivals, community gatherings (up to 500 guests)',
-    },
-    {
-      name: 'Prime Package',
-      price: '$6,780.00',
-      image: '/images/event-prime.jpeg',
-      features: [
-        '4 Stage Monitors',
-        '8 Line Arrays',
-        '6 Double 18 Subs',
-        'DJ Controller',
-        '2 Wireless Mics',
-        '20x16 Stage',
-        '20x20 Trussing Rig',
-        '20x20 Tent Cover',
-        'Advanced Lighting',
-        'Generator',
-      ],
-      description: 'Enhanced setup with covered staging and advanced lighting effects',
-      idealFor: 'Outdoor festivals, concerts, large private events (500-1,000 guests)',
-      popular: true,
-    },
-    {
-      name: 'Premium Package',
-      price: '$9,095.00',
-      image: '/images/event-premium.jpeg',
-      features: [
-        '5 Stage Monitors',
-        '12 Line Arrays',
-        '8 Double 18 Subs',
-        'DJ Controller',
-        '20x20 Stage',
-        '20x20 Trussing Rig',
-        'Advanced Lighting',
-        '8x6 LED Wall',
-        'Generator',
-        '2 Wireless Mics',
-        'Professional Engineer',
-      ],
-      description: 'Professional-grade production with LED video wall for maximum impact',
-      idealFor: 'Major concerts, corporate galas, high-profile events (1,000-2,000 guests)',
-    },
-    {
-      name: 'Elite Package',
-      price: '$16,000.00',
-      image: '/images/event-elite.jpeg',
-      features: [
-        '5 Stage Monitors',
-        '16 Line Arrays',
-        '12 Double 18 Subs',
-        'DJ Controller',
-        '2 Wireless Mics',
-        '28x28 Stage',
-        '30x30 Trussing Rig',
-        '30x30 Roof',
-        'Speaker Wings',
-        'Advanced Lighting',
-        '16x9 LED Wall',
-        'Generator',
-      ],
-      description: 'Our flagship concert package with full production capabilities',
-      idealFor: 'Large-scale concerts, festivals, major sporting events (2,000+ guests)',
-    },
-  ];
+  const compare = packages.map((p) => ({ name: p.name.replace(' Package', ''), price: p.price, ideal: p.idealFor.split('(')[0].trim(), href: `#${p.id}` }));
 
   return (
     <>
-      {/* Hero Section */}
-      <section className="relative min-h-[60vh] flex items-center justify-center bg-gradient-to-br from-primary-blue to-primary-purple overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }} />
-        </div>
-
-        <div className="container-custom text-center text-white relative z-10 pt-24">
-          <div className="flex justify-center mb-6">
-            <Music size={80} className="text-secondary-green" />
+      {/* HERO */}
+      <section className="relative overflow-hidden px-6" style={{ background: '#100c1c', paddingTop: '170px', paddingBottom: '96px' }}>
+        <div className="absolute pointer-events-none" style={{ top: '-140px', left: '-60px', width: '460px', height: '460px', borderRadius: '50%', background: 'radial-gradient(circle,rgba(47,57,232,0.4),transparent 70%)' }} />
+        <div className="absolute pointer-events-none" style={{ bottom: '-140px', right: '-80px', width: '400px', height: '400px', borderRadius: '50%', background: 'radial-gradient(circle,rgba(106,38,201,0.32),transparent 70%)' }} />
+        <div className="relative max-w-[1240px] mx-auto">
+          <div className="flex items-center gap-3.5 mb-[22px]">
+            <span style={{ display: 'block', height: '2px', width: '44px', borderRadius: '2px', background: 'linear-gradient(90deg,#2f39e8,#6a26c9)' }} />
+            <span className="bd-kicker-light">Concerts &amp; Events</span>
           </div>
-          <h1 className="text-5xl md:text-7xl font-display font-bold mb-6">
-            Concert & Event <span className="text-secondary-green">Packages</span>
+          <h1 className="bd-display text-white m-0 mb-5 flex items-center gap-4 flex-wrap" style={{ fontSize: 'clamp(28px,4.2vw,54px)', lineHeight: 1.12 }}>
+            <Music size={40} className="text-purple-soft" />
+            Concert &amp; Event Packages
           </h1>
-          <p className="text-xl md:text-2xl max-w-3xl mx-auto text-gray-200">
-            Professional audio-visual production for unforgettable concerts, festivals, 
-            and large-scale celebrations
+          <p className="font-light m-0" style={{ fontSize: 'clamp(16px,1.6vw,20px)', lineHeight: 1.6, color: '#c4bed5', maxWidth: '640px' }}>
+            Professional audio-visual production for unforgettable concerts, festivals, and large-scale celebrations.
           </p>
         </div>
       </section>
 
-      {/* Package Overview */}
-      <section className="section-padding bg-white">
-        <div className="container-custom">
-          <div className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="text-3xl font-display font-bold mb-4">
-              World-Class Production for Every Scale
-            </h2>
-            <p className="text-lg text-gray-600">
-              From intimate gatherings to massive festivals, our concert packages deliver 
-              professional-grade audio, lighting, and staging that rivals international productions.
-            </p>
-          </div>
-
-          {/* Quick Comparison */}
-          <div className="grid md:grid-cols-4 gap-6 mb-12">
-            {packages.map((pkg, index) => (
-              <a
-                key={index}
-                href={`#${pkg.name.toLowerCase().replace(/\s+/g, '-')}`}
-                className="bg-gray-50 border-2 border-gray-200 hover:border-primary-purple p-6 rounded-xl transition-all card-hover text-center"
-              >
-                <h3 className="font-display font-bold text-xl mb-2">{pkg.name}</h3>
-                <p className="text-3xl font-bold text-primary-purple mb-2">{pkg.price}</p>
-                <p className="text-sm text-gray-600">{pkg.idealFor.split('(')[0]}</p>
-              </a>
-            ))}
-          </div>
+      {/* OVERVIEW + COMPARISON */}
+      <section className="bg-white px-6 pt-[88px] pb-10">
+        <div className="max-w-[820px] mx-auto mb-[52px] text-center">
+          <h2 className="bd-display text-ink m-0 mb-4" style={{ fontSize: 'clamp(22px,2.6vw,32px)', lineHeight: 1.25 }}>World-Class Production for Every Scale</h2>
+          <p className="text-[16.5px] leading-[1.7] text-body m-0">
+            From intimate gatherings to massive festivals, our concert packages deliver professional-grade audio, lighting, and staging that rivals international productions.
+          </p>
+        </div>
+        <div className="max-w-[1240px] mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-[22px]">
+          {compare.map((c, i) => (
+            <a key={i} href={c.href} className="rounded-[16px] px-6 py-[30px] text-center no-underline block transition-all hover:-translate-y-1 hover:!border-purple" style={{ background: '#f6f5fa', border: '1px solid #ece9f3' }}>
+              <h3 className="bd-display text-ink text-[15px] m-0 mb-3">{c.name}</h3>
+              <div className="bd-display text-[26px] text-purple mb-2.5">{c.price}</div>
+              <p className="text-[13px] leading-[1.5] text-body m-0">{c.ideal}</p>
+            </a>
+          ))}
         </div>
       </section>
 
-      {/* Individual Package Cards */}
-      {packages.map((pkg, index) => (
-        <section 
-          key={index}
-          id={pkg.name.toLowerCase().replace(/\s+/g, '-')}
-          className={index % 2 === 0 ? 'section-padding bg-gray-50' : 'section-padding bg-white'}
-        >
-          <div className="container-custom">
-            <div 
-              className={`bg-white rounded-2xl shadow-2xl overflow-hidden ${
-                pkg.popular ? 'ring-4 ring-secondary-green' : ''
-              }`}
-            >
-              <div className="grid lg:grid-cols-2 gap-0">
-                {/* Image Section */}
-                <div className={`relative h-96 lg:h-auto ${index % 2 === 0 ? 'order-1' : 'order-2'}`}>
-                  <div className="relative h-full bg-gradient-to-br from-primary-purple to-primary-blue">
-                    <Image
-                      src={pkg.image}
-                      alt={`${pkg.name} concert package`}
-                      fill
-                      className="object-cover"
-                    />
-                    {pkg.popular && (
-                      <div className="absolute top-6 left-6 bg-secondary-green text-neutral-dark px-6 py-3 rounded-full font-bold text-lg shadow-lg animate-pulse">
-                        Most Popular
-                      </div>
-                    )}
-                    <div className="absolute bottom-6 right-6 bg-black/70 backdrop-blur-sm text-white px-6 py-3 rounded-lg">
-                      <div className="text-sm">Starting at</div>
-                      <div className="text-3xl font-display font-bold">{pkg.price}</div>
+      {/* PACKAGE DETAILS */}
+      {packages.map((pkg, i) => {
+        const imgRight = i % 2 === 1;
+        return (
+          <section key={pkg.id} id={pkg.id} className="px-6 py-16" style={{ background: i % 2 === 0 ? '#f6f5fa' : '#ffffff' }}>
+            <div className="max-w-[1140px] mx-auto">
+              <div className="bg-white rounded-[22px] overflow-hidden grid md:grid-cols-2" style={{ border: `1px solid ${pkg.popular ? '#6a26c9' : '#ece9f3'}`, boxShadow: pkg.popular ? '0 26px 60px rgba(106,38,201,0.2)' : '0 16px 40px rgba(22,19,31,0.08)' }}>
+                <div className={`relative min-h-[320px] md:min-h-[420px] ${imgRight ? 'md:order-2' : ''}`}>
+                  <div className="absolute inset-0" style={{ backgroundImage: `url('${pkg.image}')`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+                  <div className="absolute inset-0" style={{ background: 'linear-gradient(160deg,rgba(61,26,122,0.25),rgba(16,12,28,0.55))' }} />
+                  {pkg.popular && (
+                    <div className="absolute top-[22px] left-[22px] text-white font-bold text-[11px] tracking-[0.1em] uppercase px-4 py-2 rounded-full" style={{ background: 'linear-gradient(135deg,#6a26c9,#2f39e8)', boxShadow: '0 8px 20px rgba(106,38,201,0.4)' }}>
+                      Most Popular
                     </div>
+                  )}
+                  <div className="absolute bottom-[22px] right-[22px] text-white px-5 py-3.5 rounded-xl" style={{ background: 'rgba(16,12,28,0.8)', backdropFilter: 'blur(4px)' }}>
+                    <div className="text-[11.5px] tracking-[0.05em]" style={{ color: '#c9b8f2' }}>Starting at</div>
+                    <div className="bd-display text-[22px]">{pkg.price}</div>
                   </div>
                 </div>
-
-                {/* Content Section */}
-                <div className={`p-8 lg:p-12 flex flex-col justify-between ${index % 2 === 0 ? 'order-2' : 'order-1'}`}>
+                <div className={`p-11 flex flex-col justify-between ${imgRight ? 'md:order-1' : ''}`}>
                   <div>
-                    <div className="mb-6">
-                      <h3 className="text-4xl md:text-5xl font-display font-bold text-neutral-dark mb-4">
-                        {pkg.name}
-                      </h3>
-                      <p className="text-xl text-gray-700 mb-4">{pkg.description}</p>
-                      <div className="bg-primary-purple/10 border-l-4 border-primary-purple p-4 rounded">
-                        <p className="text-sm font-semibold text-primary-purple mb-1">Ideal For:</p>
-                        <p className="text-gray-700">{pkg.idealFor}</p>
-                      </div>
+                    <h3 className="bd-display text-ink m-0 mb-3.5" style={{ fontSize: 'clamp(24px,2.6vw,32px)' }}>{pkg.name}</h3>
+                    <p className="text-[16px] leading-[1.6] m-0 mb-[18px]" style={{ color: '#4a4557' }}>{pkg.description}</p>
+                    <div className="mb-[26px] px-[18px] py-3.5" style={{ background: 'rgba(106,38,201,0.07)', borderLeft: '3px solid #6a26c9', borderRadius: '0 8px 8px 0' }}>
+                      <p className="text-[12px] font-bold text-purple uppercase tracking-[0.05em] m-0 mb-1">Ideal For</p>
+                      <p className="text-[14px] m-0" style={{ color: '#3a3646' }}>{pkg.idealFor}</p>
                     </div>
-
-                    <div className="mb-8">
-                      <h4 className="font-semibold text-xl mb-6 text-neutral-dark flex items-center gap-2">
-                        <CheckCircle className="text-secondary-green" />
-                        Complete Package Includes:
-                      </h4>
-                      <div className="grid md:grid-cols-2 gap-x-8 gap-y-3">
-                        {pkg.features.map((feature, i) => (
-                          <div key={i} className="flex items-start gap-3">
-                            <div className="w-2 h-2 rounded-full bg-secondary-green flex-shrink-0 mt-2" />
-                            <span className="text-gray-700">{feature}</span>
-                          </div>
-                        ))}
-                      </div>
+                    <h4 className="font-bold text-[14px] text-ink m-0 mb-4 flex items-center gap-2">
+                      <CheckCircle size={18} className="text-blue" />
+                      Complete Package Includes
+                    </h4>
+                    <div className="grid sm:grid-cols-2 gap-x-6 gap-y-2.5">
+                      {pkg.features.map((f, j) => (
+                        <div key={j} className="flex items-start gap-2.5">
+                          <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[7px]" style={{ background: 'linear-gradient(135deg,#6a26c9,#2f39e8)' }} />
+                          <span className="text-[13.5px] leading-[1.5] text-body-3">{f}</span>
+                        </div>
+                      ))}
                     </div>
                   </div>
-
-                  <div className="space-y-4 pt-6 border-t-2 border-gray-100">
-                    <Link 
-                      href="/contact"
-                      className="btn-primary w-full text-center flex items-center justify-center gap-2"
-                    >
-                      <span>Book {pkg.name}</span>
-                      <ArrowRight size={20} />
+                  <div className="mt-[30px] pt-6 flex flex-col gap-3" style={{ borderTop: '1px solid #f0eef6' }}>
+                    <Link href="/contact" className="bd-btn bd-btn-gradient bd-btn-block !py-[15px] text-[13.5px]">
+                      Book {pkg.name}
+                      <ArrowRight size={17} />
                     </Link>
-                    <div className="grid grid-cols-2 gap-4">
-                      <Link
-                        href="/contact"
-                        className="text-center py-3 text-primary-purple hover:text-primary-blue font-semibold border-2 border-primary-purple hover:border-primary-blue rounded-lg transition-all"
-                      >
-                        Get Quote
-                      </Link>
-                      <Link
-                        href="/services/equipment"
-                        className="text-center py-3 text-gray-600 hover:text-primary-purple font-semibold border-2 border-gray-300 hover:border-primary-purple rounded-lg transition-all"
-                      >
-                        View Equipment
-                      </Link>
+                    <div className="grid grid-cols-2 gap-3">
+                      <Link href="/contact" className="bd-btn bd-btn-outline !py-3 text-[13px]">Get Quote</Link>
+                      <Link href="/services/equipment" className="text-center font-bold text-[13px] no-underline py-3 rounded-[10px] transition-all hover:!border-purple hover:!text-purple" style={{ color: '#5b566b', border: '1px solid #dcd8e6' }}>View Equipment</Link>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-      ))}
+          </section>
+        );
+      })}
 
-      {/* What's Included Section */}
-      <section className="section-padding bg-gradient-to-br from-neutral-dark to-gray-900 text-white">
-        <div className="container-custom">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-display font-bold mb-4">
-              Professional Service <span className="text-secondary-green">Included</span>
-            </h2>
-            <p className="text-xl text-gray-300">
-              Every package comes with comprehensive support
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                title: 'Expert Setup',
-                description: 'Professional installation and sound check by experienced technicians',
-              },
-              {
-                title: 'On-Site Support',
-                description: 'Dedicated engineer throughout your event to ensure perfect audio',
-              },
-              {
-                title: 'Equipment Insurance',
-                description: 'All equipment fully insured and maintained to highest standards',
-              },
-            ].map((item, index) => (
-              <div key={index} className="bg-white/10 backdrop-blur-sm p-6 rounded-xl">
-                <CheckCircle size={40} className="text-secondary-green mb-4" />
-                <h3 className="text-xl font-display font-bold mb-3">{item.title}</h3>
-                <p className="text-gray-300">{item.description}</p>
+      {/* SERVICE INCLUDED */}
+      <section className="relative overflow-hidden px-6 py-[88px]" style={{ background: '#100c1c' }}>
+        <div className="absolute pointer-events-none" style={{ top: '20%', left: '50%', transform: 'translateX(-50%)', width: '560px', height: '560px', borderRadius: '50%', background: 'radial-gradient(circle,rgba(106,38,201,0.16),transparent 70%)' }} />
+        <div className="relative max-w-[1000px] mx-auto text-center">
+          <h2 className="bd-display text-white m-0 mb-3.5" style={{ fontSize: 'clamp(22px,2.6vw,32px)', lineHeight: 1.25 }}>Professional Service Included</h2>
+          <p className="text-[16px] m-0 mb-10" style={{ color: '#b6afc9' }}>Every package comes with comprehensive support.</p>
+          <div className="grid md:grid-cols-3 gap-5">
+            {services.map((s, i) => (
+              <div key={i} className="rounded-[16px] px-[26px] py-8 text-left" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(4px)' }}>
+                <CheckCircle size={30} style={{ color: '#8b7fd6' }} />
+                <h3 className="font-bold text-[17px] text-white m-0 mt-3.5 mb-2">{s.title}</h3>
+                <p className="text-[14px] leading-[1.6] m-0" style={{ color: '#b6afc9' }}>{s.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Custom Solutions */}
-      <section className="section-padding bg-white">
-        <div className="container-custom">
-          <div className="bg-gradient-to-br from-primary-purple to-primary-blue text-white rounded-2xl p-8 md:p-12">
-            <div className="max-w-3xl mx-auto text-center">
-              <h3 className="text-3xl md:text-4xl font-display font-bold mb-4">
-                Need a Custom Production Solution?
-              </h3>
-              <p className="text-xl text-gray-100 mb-8">
-                Planning a unique event or need specialized equipment? We create custom packages 
-                tailored to your specific requirements, venue, and budget. From multi-day festivals 
-                to corporate product launches, we've got you covered.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link
-                  href="/contact"
-                  className="bg-secondary-green text-neutral-dark px-8 py-4 rounded-lg font-semibold hover:bg-white transition-all duration-300 shadow-lg"
-                >
-                  Request Custom Quote
-                </Link>
-                <Link
-                  href="/services/equipment"
-                  className="bg-white/10 backdrop-blur-sm text-white border-2 border-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-primary-purple transition-all duration-300"
-                >
-                  Browse Equipment
-                </Link>
-              </div>
+      {/* CUSTOM SOLUTIONS */}
+      <section className="bg-white px-6 py-[88px]">
+        <div className="max-w-[1000px] mx-auto bd-cta-band px-11 py-14 text-center">
+          <div className="relative">
+            <h3 className="bd-display text-white m-0 mb-3.5" style={{ fontSize: 'clamp(20px,2.4vw,30px)', lineHeight: 1.25 }}>Need a Custom Production Solution?</h3>
+            <p className="text-[16px] leading-[1.65] max-w-[600px] mx-auto mb-7" style={{ color: 'rgba(255,255,255,0.85)' }}>
+              Planning a unique event or need specialized equipment? We create custom packages tailored to your requirements, venue, and budget — from multi-day festivals to corporate product launches.
+            </p>
+            <div className="flex gap-3.5 justify-center flex-wrap">
+              <Link href="/contact" className="bd-btn bd-btn-white bd-btn-sm">Request Custom Quote</Link>
+              <Link href="/services/equipment" className="bd-btn bd-btn-glass bd-btn-sm">Browse Equipment</Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Contact CTA */}
-      <section className="section-padding bg-secondary-green">
-        <div className="container-custom">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div>
-              <h3 className="text-4xl font-display font-bold text-neutral-dark mb-4">
-                Let's Make Your Event Legendary
-              </h3>
-              <p className="text-xl text-neutral-dark/80 mb-6">
-                Our production team is ready to bring your concert or event vision to life
-              </p>
-            </div>
-            <div className="space-y-4">
-              <a
-                href="tel:+12424493010"
-                className="flex items-center gap-3 bg-white text-primary-purple p-4 rounded-lg font-semibold hover:bg-primary-purple hover:text-white transition-all shadow-lg"
-              >
-                <Phone size={24} />
-                <div>
-                  <div className="text-sm">Call us now</div>
-                  <div className="text-xl">1-242-449-3010</div>
-                </div>
-              </a>
-              <a
-                href="mailto:info@bigdunnentertainment.com"
-                className="flex items-center gap-3 bg-white text-primary-purple p-4 rounded-lg font-semibold hover:bg-primary-purple hover:text-white transition-all shadow-lg"
-              >
-                <Mail size={24} />
-                <div>
-                  <div className="text-sm">Email us</div>
-                  <div className="text-xl">info@bigdunnentertainment.com</div>
-                </div>
-              </a>
-            </div>
+      {/* CONTACT CTA */}
+      <section className="px-6 py-20" style={{ background: '#100c1c' }}>
+        <div className="max-w-[1100px] mx-auto grid md:grid-cols-[1.1fr_1fr] gap-12 items-center">
+          <div>
+            <h3 className="bd-display text-white m-0 mb-3.5" style={{ fontSize: 'clamp(22px,2.6vw,32px)', lineHeight: 1.25 }}>Let&apos;s Make Your Event Legendary</h3>
+            <p className="text-[17px] leading-[1.6] m-0" style={{ color: '#b6afc9' }}>Our production team is ready to bring your concert or event vision to life.</p>
+          </div>
+          <div className="flex flex-col gap-3.5">
+            <a href="tel:+12424493010" className="flex items-center gap-4 px-6 py-5 rounded-[14px] no-underline transition-all hover:!border-purple" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)' }}>
+              <Phone size={26} style={{ color: '#8b7fd6' }} />
+              <div>
+                <div className="text-[12.5px]" style={{ color: '#b6afc9' }}>Call us now</div>
+                <div className="text-[18px] font-bold text-white">1-242-449-3010</div>
+              </div>
+            </a>
+            <a href="mailto:info@bigdunnentertainment.com" className="flex items-center gap-4 px-6 py-5 rounded-[14px] no-underline transition-all hover:!border-purple" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)' }}>
+              <Mail size={26} style={{ color: '#8b7fd6' }} />
+              <div>
+                <div className="text-[12.5px]" style={{ color: '#b6afc9' }}>Email us</div>
+                <div className="text-[15px] font-bold text-white">info@bigdunnentertainment.com</div>
+              </div>
+            </a>
           </div>
         </div>
       </section>

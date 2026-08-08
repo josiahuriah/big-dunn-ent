@@ -1,11 +1,22 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Michroma, Montserrat } from "next/font/google";
 // @ts-ignore: side-effect global CSS import handled by Next.js
 import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
-const inter = Inter({ subsets: ["latin"] });
+const michroma = Michroma({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-michroma-var",
+  display: "swap",
+});
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-montserrat-var",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Big Dunn Entertainment - Premium Event Equipment & Audio Visual Rentals",
@@ -37,8 +48,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className={`${inter.className} antialiased`}>
+    <html lang="en" className={`scroll-smooth ${michroma.variable} ${montserrat.variable}`}>
+      <body className="antialiased">
         <Header />
         <main className="min-h-screen">
           {children}

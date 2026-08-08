@@ -1,309 +1,235 @@
 import Link from 'next/link';
-import { Target, Heart, Award, Users, Zap, Shield } from 'lucide-react';
-import Image from 'next/image';
+import { Target, Eye, Heart, Medal, Users, Zap, ShieldCheck } from 'lucide-react';
 
 export const metadata = {
   title: 'About Us - Big Dunn Entertainment | Nassau Event Equipment Experts',
-  description: 'Learn about Big Dunn Entertainment, Nassau\'s premier event equipment rental company. Discover our story, mission, and commitment to creating unforgettable events.',
+  description:
+    "Learn about Big Dunn Entertainment, Nassau's premier event equipment rental company. Discover our story, mission, and commitment to creating unforgettable events.",
 };
 
 export default function AboutPage() {
   const values = [
-    {
-      icon: Heart,
-      title: 'Passion for Excellence',
-      description: 'We pour our heart into every event, treating each celebration as if it were our own.',
-    },
-    {
-      icon: Award,
-      title: 'Professional Quality',
-      description: 'Top-tier equipment and expert service that meets international standards.',
-    },
-    {
-      icon: Users,
-      title: 'Client-Focused',
-      description: 'Your vision drives us. We listen, adapt, and deliver exactly what you need.',
-    },
-    {
-      icon: Zap,
-      title: 'Innovation',
-      description: 'Staying ahead with the latest technology and creative event solutions.',
-    },
-    {
-      icon: Shield,
-      title: 'Reliability',
-      description: 'Dependable service you can count on, every time, without exception.',
-    },
-    {
-      icon: Target,
-      title: 'Attention to Detail',
-      description: 'Perfecting every element to ensure seamless, memorable experiences.',
-    },
+    { Icon: Heart, title: 'Passion for Excellence', desc: 'We pour our heart into every event, treating each celebration as if it were our own.' },
+    { Icon: Medal, title: 'Professional Quality', desc: 'Top-tier equipment and expert service that meets international standards.' },
+    { Icon: Users, title: 'Client-Focused', desc: 'Your vision drives us. We listen, adapt, and deliver exactly what you need.' },
+    { Icon: Zap, title: 'Innovation', desc: 'Staying ahead with the latest technology and creative event solutions.' },
+    { Icon: ShieldCheck, title: 'Reliability', desc: 'Dependable service you can count on, every time, without exception.' },
+    { Icon: Target, title: 'Attention to Detail', desc: 'Perfecting every element to ensure seamless, memorable experiences.' },
   ];
 
   const timeline = [
-    {
-      year: '2014',
-      title: 'The Beginning',
-      description: 'Founded by Glenn Williams Jr. with a vision to revolutionize event entertainment in Nassau.',
-    },
-    {
-      year: '2016',
-      title: 'Major Expansion',
-      description: 'Invested in professional-grade RCF audio systems and intelligent lighting equipment.',
-    },
-    {
-      year: '2019',
-      title: 'Industry Leader',
-      description: 'Became Nassau\'s go-to provider for large-scale concerts and corporate events.',
-    },
-    {
-      year: '2024',
-      title: 'Today',
-      description: 'Serving 500+ events annually with cutting-edge equipment and exceptional service.',
-    },
+    { year: '2014', title: 'The Beginning', desc: 'Founded by Glenn Williams Jr. with a vision to revolutionize event entertainment in Nassau.' },
+    { year: '2016', title: 'Major Expansion', desc: 'Invested in professional-grade RCF audio systems and intelligent lighting equipment.' },
+    { year: '2019', title: 'Industry Leader', desc: "Became Nassau's go-to provider for large-scale concerts and corporate events." },
+    { year: '2024', title: 'Today', desc: 'Serving 500+ events annually with cutting-edge equipment and exceptional service.' },
   ];
 
   return (
     <>
-      {/* Hero Section */}
-      <section className="relative min-h-[60vh] flex items-center justify-center bg-gradient-to-br from-primary-purple to-primary-blue overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }} />
-        </div>
-
-        <div className="container-custom text-center text-white relative z-10 pt-24">
-          <h1 className="text-5xl md:text-7xl font-display font-bold mb-6">
-            About <span className="text-secondary-green">Big Dunn</span>
+      {/* HERO */}
+      <section className="relative overflow-hidden px-6" style={{ background: '#100c1c', paddingTop: '180px', paddingBottom: '96px' }}>
+        <div className="absolute pointer-events-none" style={{ top: '-140px', right: '-60px', width: '480px', height: '480px', borderRadius: '50%', background: 'radial-gradient(circle,rgba(106,38,201,0.4),transparent 70%)' }} />
+        <div className="absolute pointer-events-none" style={{ bottom: '-160px', left: '-80px', width: '420px', height: '420px', borderRadius: '50%', background: 'radial-gradient(circle,rgba(47,57,232,0.3),transparent 70%)' }} />
+        <div className="relative max-w-[1240px] mx-auto">
+          <div className="flex items-center gap-3.5 mb-[22px]">
+            <span className="bd-kline" />
+            <span className="bd-kicker-light">Our Story</span>
+          </div>
+          <h1 className="bd-display text-white m-0 mb-[22px]" style={{ fontSize: 'clamp(32px,4.6vw,60px)', lineHeight: 1.12 }}>
+            About Big Dunn
           </h1>
-          <p className="text-xl md:text-2xl max-w-3xl mx-auto text-gray-200">
-            Transforming visions into unforgettable experiences through professional 
-            audio-visual excellence
+          <p className="font-light m-0" style={{ fontSize: 'clamp(16px,1.6vw,20px)', lineHeight: 1.6, color: '#c4bed5', maxWidth: '620px' }}>
+            Transforming visions into unforgettable experiences through professional audio-visual excellence.
           </p>
         </div>
       </section>
 
-      {/* Our Story Section */}
-      <section className="section-padding bg-white">
-        <div className="container-custom">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
-                Our <span className="gradient-text">Story</span>
-              </h2>
-              <div className="space-y-4 text-gray-700 leading-relaxed">
-                <p className="text-lg">
-                  Big Dunn Entertainment was born from a passion for creating extraordinary 
-                  moments. Founded by <strong>Glenn Williams Jr.</strong>, a visionary young 
-                  Bahamian entrepreneur, our company has grown from humble beginnings to 
-                  become Nassau's most trusted name in event equipment and entertainment.
-                </p>
-                <p>
-                  What started as a dream to elevate the entertainment industry in The Bahamas 
-                  has evolved into a full-service audio-visual company delivering world-class 
-                  solutions. We believe every event—whether an intimate wedding or a large-scale 
-                  concert—deserves the same level of dedication, precision, and professional excellence.
-                </p>
-                <p>
-                  Today, we're proud to serve over 500 events annually, from elegant weddings 
-                  at premier venues to high-energy concerts and corporate galas. Our commitment 
-                  to innovation keeps us at the forefront of technology, while our focus on 
-                  personalized service ensures every client feels valued and heard.
-                </p>
-                <p className="font-semibold text-primary-purple text-lg">
-                  "Ideas for Life" isn't just our tagline—it's our promise to bring your 
-                  vision to life with creativity, expertise, and unwavering dedication.
-                </p>
-              </div>
+      {/* OUR STORY */}
+      <section className="bg-white px-6 py-24">
+        <div className="max-w-[1240px] mx-auto grid lg:grid-cols-[1.15fr_1fr] gap-[72px] items-center">
+          <div>
+            <div className="flex items-center gap-3.5 mb-[18px]">
+              <span className="bd-kline" />
+              <span className="bd-kicker">Our Story</span>
             </div>
-
-            {/* Placeholder for company image */}
-            <div className="relative">
-              <div className="aspect-square bg-gradient-to-br from-primary-purple to-primary-blue rounded-2xl flex items-center justify-center text-white">
-                <div className="text-center p-8">
-                  <Users size={80} className="mx-auto mb-4" />
-                  <Image 
-                    src="/images/team.jpg"
-                    alt="Big Dunn Entertainment"
-                    fill
-                    />
-                </div>
-              </div>
-              <div className="absolute -bottom-6 -right-6 bg-secondary-green text-neutral-dark p-6 rounded-xl shadow-xl">
-                <div className="text-4xl font-display font-bold">10+</div>
-                <div className="text-sm font-semibold">Years of Excellence</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Mission & Vision */}
-      <section className="section-padding bg-gray-50">
-        <div className="container-custom">
-          <div className="grid md:grid-cols-2 gap-12">
-            <div className="bg-gradient-to-br from-primary-purple to-primary-blue text-white p-12 rounded-2xl shadow-xl">
-              <Target size={48} className="mb-6" />
-              <h3 className="text-3xl font-display font-bold mb-4">Our Mission</h3>
-              <p className="text-lg text-gray-100 leading-relaxed">
-                To deliver top-quality, customizable audio-visual solutions using the latest 
-                technology, providing comprehensive and reliable services that transform events 
-                into unforgettable experiences. We strive to exceed expectations through 
-                innovation, expertise, and exceptional customer service.
-              </p>
-            </div>
-
-            <div className="bg-white border-4 border-secondary-green p-12 rounded-2xl shadow-xl">
-              <Heart size={48} className="mb-6 text-secondary-green" />
-              <h3 className="text-3xl font-display font-bold mb-4 text-neutral-dark">Our Vision</h3>
-              <p className="text-lg text-gray-700 leading-relaxed">
-                To be the Caribbean's premier event equipment and entertainment company, 
-                recognized for setting industry standards in quality, innovation, and client 
-                satisfaction. We envision a future where every event we touch becomes a 
-                masterpiece of creativity and technical excellence.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Our Values */}
-      <section className="section-padding bg-white">
-        <div className="container-custom">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-              Our <span className="gradient-text">Core Values</span>
+            <h2 className="bd-display text-ink m-0 mb-6" style={{ fontSize: 'clamp(24px,2.8vw,36px)', lineHeight: 1.2 }}>
+              Born From a Passion for Extraordinary Moments
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              The principles that guide everything we do
+            <div className="flex flex-col gap-[18px] text-[15.5px] leading-[1.75]" style={{ color: '#4a4557' }}>
+              <p className="m-0">
+                Big Dunn Entertainment was born from a passion for creating extraordinary moments. Founded by{' '}
+                <strong className="text-ink">Glenn Williams Jr.</strong>, a visionary young Bahamian entrepreneur, our company has
+                grown from humble beginnings to become Nassau&apos;s most trusted name in event equipment and entertainment.
+              </p>
+              <p className="m-0">
+                What started as a dream to elevate the entertainment industry in The Bahamas has evolved into a full-service
+                audio-visual company delivering world-class solutions. Every event — whether an intimate wedding or a large-scale
+                concert — deserves the same dedication, precision, and professional excellence.
+              </p>
+              <p className="m-0">
+                Today, we&apos;re proud to serve over 500 events annually, from elegant weddings at premier venues to high-energy
+                concerts and corporate galas.
+              </p>
+            </div>
+            <div className="mt-[26px] pl-5" style={{ borderLeft: '3px solid #6a26c9' }}>
+              <p className="m-0 font-semibold text-[16px] leading-[1.6] italic" style={{ color: '#3d1a7a' }}>
+                &ldquo;Ideas for Life&rdquo; isn&apos;t just our tagline — it&apos;s our promise to bring your vision to life with
+                creativity, expertise, and unwavering dedication.
+              </p>
+            </div>
+          </div>
+
+          <div className="relative">
+            <div className="relative rounded-[20px] overflow-hidden aspect-square" style={{ boxShadow: '0 30px 70px rgba(22,19,31,0.16)' }}>
+              <div className="absolute inset-0" style={{ backgroundImage: "url('/images/team.jpg')", backgroundSize: 'cover', backgroundPosition: 'center' }} />
+              <div className="absolute inset-0" style={{ background: 'linear-gradient(160deg,transparent 55%,rgba(61,26,122,0.5))' }} />
+            </div>
+            <div
+              className="absolute text-white text-center px-[30px] py-6 rounded-[16px]"
+              style={{ bottom: '-26px', right: '-26px', background: 'linear-gradient(135deg,#6a26c9,#2f39e8)', boxShadow: '0 20px 44px rgba(106,38,201,0.4)' }}
+            >
+              <div className="bd-display text-[34px] leading-none">10+</div>
+              <div className="font-semibold text-[12px] tracking-[0.06em] mt-1.5 uppercase">Years of Excellence</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* MISSION & VISION */}
+      <section className="px-6 py-24" style={{ background: '#f6f5fa' }}>
+        <div className="max-w-[1240px] mx-auto grid md:grid-cols-2 gap-7">
+          <div className="relative text-white p-12 rounded-[20px] overflow-hidden" style={{ background: 'linear-gradient(135deg,#3d1a7a,#6a26c9 60%,#2f39e8)', boxShadow: '0 24px 55px rgba(106,38,201,0.28)' }}>
+            <div className="absolute" style={{ top: '-60px', right: '-40px', width: '220px', height: '220px', borderRadius: '50%', background: 'radial-gradient(circle,rgba(255,255,255,0.16),transparent 70%)' }} />
+            <div className="relative">
+              <div className="w-[60px] h-[60px] rounded-[15px] flex items-center justify-center mb-6" style={{ background: 'rgba(255,255,255,0.16)' }}>
+                <Target size={28} className="text-white" />
+              </div>
+              <h3 className="bd-display text-2xl m-0 mb-4">Our Mission</h3>
+              <p className="text-[15.5px] leading-[1.75] m-0" style={{ color: 'rgba(255,255,255,0.88)' }}>
+                To deliver top-quality, customizable audio-visual solutions using the latest technology — comprehensive, reliable
+                services that transform events into unforgettable experiences through innovation, expertise, and exceptional
+                customer service.
+              </p>
+            </div>
+          </div>
+          <div className="bg-white p-12 rounded-[20px]" style={{ border: '1px solid #ece9f3', boxShadow: '0 12px 30px rgba(22,19,31,0.05)' }}>
+            <div className="w-[60px] h-[60px] rounded-[15px] flex items-center justify-center text-purple mb-6" style={{ background: 'linear-gradient(135deg,rgba(106,38,201,0.12),rgba(47,57,232,0.12))' }}>
+              <Eye size={28} />
+            </div>
+            <h3 className="bd-display text-ink text-2xl m-0 mb-4">Our Vision</h3>
+            <p className="text-[15.5px] leading-[1.75] m-0" style={{ color: '#4a4557' }}>
+              To be the Caribbean&apos;s premier event equipment and entertainment company — recognized for setting industry
+              standards in quality, innovation, and client satisfaction, where every event we touch becomes a masterpiece of
+              creativity and technical excellence.
             </p>
           </div>
+        </div>
+      </section>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {values.map((value, index) => (
-              <div 
-                key={index}
-                className="bg-white p-8 rounded-xl shadow-lg border-2 border-gray-100 card-hover"
-              >
-                <div className="w-16 h-16 bg-gradient-to-br from-primary-purple to-primary-blue rounded-lg flex items-center justify-center mb-6">
-                  <value.icon size={32} className="text-white" />
+      {/* CORE VALUES */}
+      <section className="bg-white px-6 py-24">
+        <div className="max-w-[1240px] mx-auto">
+          <div className="text-center max-w-[600px] mx-auto mb-14">
+            <div className="flex items-center justify-center gap-3.5 mb-[18px]">
+              <span style={{ height: '2px', width: '40px', background: 'linear-gradient(90deg,transparent,#6a26c9)' }} />
+              <span className="bd-kicker">Core Values</span>
+              <span style={{ height: '2px', width: '40px', background: 'linear-gradient(90deg,#2f39e8,transparent)' }} />
+            </div>
+            <h2 className="bd-display text-ink m-0" style={{ fontSize: 'clamp(24px,2.8vw,36px)', lineHeight: 1.2 }}>
+              What Guides Everything We Do
+            </h2>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {values.map((v, i) => (
+              <div key={i} className="bd-card bd-card-hover p-8">
+                <div className="w-14 h-14 rounded-[14px] flex items-center justify-center text-white mb-[22px]" style={{ background: 'linear-gradient(135deg,#6a26c9,#2f39e8)' }}>
+                  <v.Icon size={26} />
                 </div>
-                <h3 className="text-xl font-display font-bold mb-3">{value.title}</h3>
-                <p className="text-gray-600">{value.description}</p>
+                <h3 className="font-bold text-[18px] text-ink m-0 mb-2.5">{v.title}</h3>
+                <p className="text-[14.5px] leading-[1.65] text-body m-0">{v.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Timeline */}
-      <section className="section-padding bg-gradient-to-br from-gray-900 to-neutral-dark text-white">
-        <div className="container-custom">
+      {/* JOURNEY / TIMELINE */}
+      <section className="relative overflow-hidden px-6 py-24" style={{ background: '#100c1c' }}>
+        <div className="absolute pointer-events-none" style={{ top: '20%', left: '50%', transform: 'translateX(-50%)', width: '600px', height: '600px', borderRadius: '50%', background: 'radial-gradient(circle,rgba(106,38,201,0.18),transparent 70%)' }} />
+        <div className="relative max-w-[1000px] mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-              Our <span className="text-secondary-green">Journey</span>
+            <div className="flex items-center justify-center gap-3.5 mb-[18px]">
+              <span style={{ height: '2px', width: '40px', background: 'linear-gradient(90deg,transparent,#8b7fd6)' }} />
+              <span className="bd-kicker-light" style={{ letterSpacing: '0.3em' }}>Our Journey</span>
+              <span style={{ height: '2px', width: '40px', background: 'linear-gradient(90deg,#8b7fd6,transparent)' }} />
+            </div>
+            <h2 className="bd-display text-white m-0" style={{ fontSize: 'clamp(24px,2.8vw,36px)', lineHeight: 1.2 }}>
+              A Decade of Growth
             </h2>
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              A decade of growth, innovation, and unforgettable events
-            </p>
           </div>
-
-          <div className="relative">
-            {/* Timeline line */}
-            <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-secondary-green" />
-
-            <div className="space-y-12">
-              {timeline.map((item, index) => (
-                <div 
-                  key={index}
-                  className={`relative flex flex-col lg:flex-row items-center gap-8 ${
-                    index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
-                  }`}
+          <div className="relative flex flex-col gap-[22px]">
+            <div className="absolute hidden sm:block" style={{ left: '36px', top: '10px', bottom: '10px', width: '2px', background: 'linear-gradient(180deg,#6a26c9,#2f39e8)' }} />
+            {timeline.map((t, i) => (
+              <div key={i} className="relative flex gap-7 items-start">
+                <div
+                  className="relative z-[2] flex-shrink-0 w-[74px] h-[74px] rounded-full flex items-center justify-center bd-display text-[14px]"
+                  style={{ background: '#100c1c', border: '2px solid #6a26c9', color: '#c9b8f2' }}
                 >
-                  {/* Content */}
-                  <div className="flex-1 bg-white/10 backdrop-blur-sm p-8 rounded-xl">
-                    <div className="text-secondary-green text-3xl font-display font-bold mb-2">
-                      {item.year}
-                    </div>
-                    <h3 className="text-2xl font-display font-bold mb-3">{item.title}</h3>
-                    <p className="text-gray-300">{item.description}</p>
-                  </div>
-
-                  {/* Circle marker */}
-                  <div className="hidden lg:block w-6 h-6 bg-secondary-green rounded-full border-4 border-neutral-dark z-10" />
-
-                  {/* Empty space for alternating layout */}
-                  <div className="hidden lg:block flex-1" />
+                  {t.year}
                 </div>
-              ))}
-            </div>
+                <div className="flex-1 rounded-[16px] px-[30px] py-[26px]" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(4px)' }}>
+                  <h3 className="font-bold text-[19px] text-white m-0 mb-2">{t.title}</h3>
+                  <p className="text-[14.5px] leading-[1.65] m-0" style={{ color: '#b6afc9' }}>{t.desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="section-padding bg-white">
-        <div className="container-custom">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-              Meet Our <span className="gradient-text">Founder</span>
+      {/* FOUNDER */}
+      <section className="px-6 py-24" style={{ background: '#f6f5fa' }}>
+        <div className="max-w-[1100px] mx-auto">
+          <div className="text-center max-w-[600px] mx-auto mb-12">
+            <span className="bd-kicker">Meet Our Founder</span>
+            <h2 className="bd-display text-ink m-0 mt-3.5" style={{ fontSize: 'clamp(24px,2.8vw,36px)', lineHeight: 1.2 }}>
+              The Visionary Behind Big Dunn
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              The visionary behind Big Dunn Entertainment
-            </p>
           </div>
-
-          <div className="max-w-4xl mx-auto bg-gradient-to-br from-primary-purple to-primary-blue rounded-2xl overflow-hidden shadow-2xl">
-            <div className="grid md:grid-cols-2 gap-8 p-8 md:p-12">
-              {/* Placeholder for founder image */}
-              <div className="aspect-square bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
-                <div className="text-center text-white">
-                  <Users size={80} className="mx-auto mb-4" />
-                  <p className="text-xl font-display font-bold">Glenn Williams Jr.</p>
-                  <Image
-                    src='/images/glenn.jpg'
-                    alt="Founder"
-                    fill
-                  />
-                </div>
-              </div>
-
-              <div className="text-white flex flex-col justify-center">
-                <h3 className="text-3xl font-display font-bold mb-4">Glenn Williams Jr.</h3>
-                <p className="text-secondary-green font-semibold mb-4">Founder & CEO</p>
-                <p className="text-gray-100 leading-relaxed mb-6">
-                  A youthful Bahamian entrepreneur with unmatched dedication and precision, 
-                  Glenn consistently exceeds client expectations. With a commitment to 
-                  innovation and excellence, he leads Big Dunn Entertainment in staying 
-                  ahead of industry trends to offer cutting-edge solutions and exceptional service.
-                </p>
-                <p className="italic text-gray-200">
-                  "Every event is an opportunity to create something extraordinary. That's 
-                  what drives me and our entire team every single day."
-                </p>
-              </div>
+          <div className="bg-white rounded-[22px] overflow-hidden grid md:grid-cols-[0.9fr_1.1fr]" style={{ border: '1px solid #ece9f3', boxShadow: '0 24px 55px rgba(22,19,31,0.1)' }}>
+            <div className="relative min-h-[420px]">
+              <div className="absolute inset-0" style={{ backgroundImage: "url('/images/glenn.jpg')", backgroundSize: 'cover', backgroundPosition: 'center top' }} />
+              <div className="absolute inset-0" style={{ background: 'linear-gradient(160deg,transparent 60%,rgba(61,26,122,0.4))' }} />
+            </div>
+            <div className="p-12 flex flex-col justify-center">
+              <h3 className="bd-display text-ink text-2xl m-0 mb-2">Glenn Williams Jr.</h3>
+              <p className="font-bold text-[13px] tracking-[0.08em] uppercase text-purple m-0 mb-[22px]">Founder &amp; CEO</p>
+              <p className="text-[15px] leading-[1.75] m-0 mb-5" style={{ color: '#4a4557' }}>
+                A youthful Bahamian entrepreneur with unmatched dedication and precision, Glenn consistently exceeds client
+                expectations. With a commitment to innovation and excellence, he leads Big Dunn Entertainment in staying ahead of
+                industry trends to offer cutting-edge solutions and exceptional service.
+              </p>
+              <p className="text-[15.5px] leading-[1.7] italic m-0" style={{ color: '#3d1a7a' }}>
+                &ldquo;Every event is an opportunity to create something extraordinary. That&apos;s what drives me and our entire team
+                every single day.&rdquo;
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="section-padding bg-secondary-green">
-        <div className="container-custom text-center">
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-neutral-dark mb-6">
-            Let's Create Something Amazing Together
-          </h2>
-          <p className="text-xl text-neutral-dark/80 mb-8 max-w-2xl mx-auto">
-            Experience the Big Dunn difference for your next event
-          </p>
-          <Link 
-            href="/contact" 
-            className="inline-block bg-primary-purple text-white px-8 py-4 rounded-lg font-semibold hover:bg-neutral-dark transition-all duration-300 shadow-lg"
-          >
-            Get In Touch
-          </Link>
+      {/* CTA */}
+      <section className="px-6 pb-24" style={{ background: '#f6f5fa' }}>
+        <div className="max-w-[1240px] mx-auto bd-cta-band px-12 py-[72px] text-center">
+          <div className="relative">
+            <h2 className="bd-display text-white m-0 mb-[18px]" style={{ fontSize: 'clamp(24px,3vw,38px)', lineHeight: 1.2 }}>
+              Let&apos;s Create Something Amazing Together
+            </h2>
+            <p className="text-[18px] leading-[1.6] max-w-[520px] mx-auto mb-[34px]" style={{ color: 'rgba(255,255,255,0.82)' }}>
+              Experience the Big Dunn difference for your next event.
+            </p>
+            <Link href="/contact" className="bd-btn bd-btn-white">Get In Touch</Link>
+          </div>
         </div>
       </section>
     </>

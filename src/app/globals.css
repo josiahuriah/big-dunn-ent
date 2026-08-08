@@ -1,138 +1,266 @@
 @import "tailwindcss";
 
-/* Tailwind CSS 4 Theme Configuration */
+/* ═══════════════════════════════════════════════════════════════════════════
+   Big Dunn Entertainment — brand refresh.
+   Premium, light-but-refined: purple-led (#6a26c9) with royal-blue accents
+   (#2f39e8), Michroma display + Montserrat body. Light grounds with strategic
+   dark sections (hero, review, timeline, footer) and a saturated purple CTA.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
 @theme {
-  /* Brand Colors */
-  --color-primary-purple: #682cb3;
-  --color-primary-blue: #0300ff;
-  --color-secondary-green: #0300ff;
-  /* --color-secondary-green: #1eff00; - changed to blue */
-  --color-neutral-dark: #222222;
-  
-  /* Font Families */
-  --font-family-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-family-serif: 'Georgia', 'Times New Roman', serif;
-  --font-family-display: 'Inter', system-ui, sans-serif;
+  /* Brand */
+  --color-purple: #6a26c9;
+  --color-blue: #2f39e8;
+  --color-purple-deep: #3d1a7a;
+  --color-purple-soft: #c9b8f2;
+
+  /* Text */
+  --color-ink: #16131f;
+  --color-body: #5b566b;
+  --color-body-2: #4a4557;
+  --color-body-3: #3a3646;
+  --color-muted: #8b869a;
+
+  /* Surfaces & lines */
+  --color-bg: #ffffff;
+  --color-alt: #f6f5fa;
+  --color-line: #ece9f3;
+  --color-line-2: #dcd8e6;
+  --color-line-hover: #dcd5ef;
+
+  /* Dark ground (hero / review / footer / timeline) */
+  --color-dark: #100c1c;
+  --color-on-dark: #c4bed5;
+  --color-on-dark-2: #b6afc9;
+
+  /* Legacy brand tokens kept mapped so any stray utility still resolves. */
+  --color-primary-purple: #6a26c9;
+  --color-primary-blue: #2f39e8;
+  --color-secondary-green: #6a26c9;
+  --color-neutral-dark: #16131f;
+
+  /* Fonts (loaded via next/font in layout.tsx) */
+  --font-michroma: var(--font-michroma-var), 'Michroma', system-ui, sans-serif;
+  --font-montserrat: var(--font-montserrat-var), 'Montserrat', system-ui, sans-serif;
+  --font-family-sans: var(--font-montserrat);
+  --font-family-display: var(--font-michroma);
+
+  --radius-md: 11px;
+  --radius-lg: 18px;
 }
 
-/* Base Styles */
-body {
-  @apply bg-white text-neutral-dark;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  @apply font-[family:var(--font-family-display)] font-bold;
-}
-
-/* Custom Component Styles */
-.btn-primary {
-  @apply bg-primary-purple text-white px-8 py-4 rounded-lg font-semibold 
-         hover:bg-primary-blue transition-all duration-300 
-         shadow-lg hover:shadow-xl transform hover:scale-105;
-}
-
-.btn-secondary {
-  @apply bg-white text-primary-purple border-2 border-primary-purple 
-         px-8 py-4 rounded-lg font-semibold 
-         hover:bg-primary-purple hover:text-white transition-all duration-300;
-}
-
-.section-padding {
-  @apply py-20 px-4 md:px-8 lg:px-16;
-}
-
-.container-custom {
-  @apply max-w-7xl mx-auto;
-}
-
-.gradient-text {
-  @apply bg-gradient-to-r from-primary-purple to-primary-blue 
-         bg-clip-text text-transparent;
-}
-
-.card-hover {
-  @apply transition-all duration-300 hover:shadow-2xl hover:-translate-y-2;
-}
-
-/* Animation Keyframes */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+/* — Base — (in @layer base so Tailwind text-color utilities win over these) */
+@layer base {
+  body {
+    margin: 0;
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-montserrat);
+    -webkit-font-smoothing: antialiased;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  a { color: var(--color-purple); }
+  a:hover { color: var(--color-blue); }
+}
+::selection { background: rgba(106, 38, 201, 0.18); }
+:focus-visible { outline: 2px solid var(--color-purple); outline-offset: 2px; }
+
+/* Michroma display type — always uppercase, weight 400. */
+.bd-display {
+  font-family: var(--font-michroma);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
+  line-height: 1.18;
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* ── Kicker (eyebrow) ────────────────────────────────────────────────────── */
+.bd-kline {
+  display: block;
+  height: 2px;
+  width: 40px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #6a26c9, #2f39e8);
+  flex-shrink: 0;
+}
+.bd-kicker {
+  font-weight: 700;
+  font-size: 12.5px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-purple);
+}
+.bd-kicker-light {
+  font-weight: 700;
+  font-size: 12.5px;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--color-purple-soft);
 }
 
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+/* ── Buttons ─────────────────────────────────────────────────────────────── */
+.bd-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  font-family: var(--font-montserrat);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 16px 32px;
+  border-radius: 11px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.bd-btn-sm { padding: 14px 28px; font-size: 13.5px; }
+.bd-btn-block { width: 100%; }
+
+.bd-btn-primary {
+  background: #6a26c9;
+  color: #fff;
+  box-shadow: 0 14px 34px rgba(106, 38, 201, 0.36);
+}
+.bd-btn-primary:hover { background: #2f39e8; color: #fff; transform: translateY(-2px); }
+
+.bd-btn-gradient {
+  background: linear-gradient(135deg, #6a26c9, #2f39e8);
+  color: #fff;
+  box-shadow: 0 12px 28px rgba(106, 38, 201, 0.28);
+}
+.bd-btn-gradient:hover { color: #fff; transform: translateY(-2px); }
+
+.bd-btn-white {
+  background: #fff;
+  color: #3d1a7a;
+}
+.bd-btn-white:hover { color: #3d1a7a; transform: translateY(-2px); box-shadow: 0 16px 34px rgba(0, 0, 0, 0.25); }
+
+.bd-btn-outline {
+  background: transparent;
+  color: #6a26c9;
+  border-color: #6a26c9;
+}
+.bd-btn-outline:hover { background: #6a26c9; color: #fff; }
+
+/* On dark grounds / hero */
+.bd-btn-outline-light {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(4px);
+}
+.bd-btn-outline-light:hover { background: rgba(255, 255, 255, 0.16); color: #fff; border-color: rgba(255, 255, 255, 0.5); }
+
+/* On the purple CTA band */
+.bd-btn-glass {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+.bd-btn-glass:hover { background: rgba(255, 255, 255, 0.2); color: #fff; }
+
+/* ── Cards ───────────────────────────────────────────────────────────────── */
+.bd-card {
+  background: #fff;
+  border: 1px solid var(--color-line);
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(22, 19, 31, 0.05);
+  transition: all 0.25s ease;
+}
+.bd-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 50px rgba(22, 19, 31, 0.12);
+  border-color: var(--color-line-hover);
 }
 
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+/* ── Gradient text (stat figures) ────────────────────────────────────────── */
+.bd-gradient-text {
+  background: linear-gradient(135deg, #6a26c9, #2f39e8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
-.animate-fadeIn {
-  animation: fadeIn 0.8s ease-out forwards;
+/* ── Saturated CTA band ──────────────────────────────────────────────────── */
+.bd-cta-band {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  background: linear-gradient(120deg, #38176e 0%, #6a26c9 50%, #2f39e8 100%);
+}
+.bd-cta-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.12;
+  background-image:
+    radial-gradient(circle at 20% 30%, #fff 1px, transparent 1px),
+    radial-gradient(circle at 70% 70%, #fff 1px, transparent 1px);
+  background-size: 44px 44px;
+  pointer-events: none;
 }
 
-.animate-fadeInUp {
-  animation: fadeInUp 1s ease-out forwards;
+/* ── Form fields ─────────────────────────────────────────────────────────── */
+.bd-input {
+  width: 100%;
+  padding: 13px 15px;
+  background: #fff;
+  border: 1px solid var(--color-line-2);
+  border-radius: 10px;
+  color: var(--color-ink);
+  font-family: var(--font-montserrat);
+  font-size: 14.5px;
+  outline: none;
+  transition: border-color 0.18s, box-shadow 0.18s;
+}
+.bd-input::placeholder { color: #a7a2b3; }
+.bd-input:focus {
+  border-color: #6a26c9;
+  box-shadow: 0 0 0 3px rgba(106, 38, 201, 0.12);
 }
 
-.animate-slideInLeft {
-  animation: slideInLeft 0.8s ease-out forwards;
+/* Dark form fields (review section) */
+.bd-input-dark {
+  width: 100%;
+  padding: 13px 15px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 10px;
+  color: #fff;
+  font-family: var(--font-montserrat);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.18s;
+}
+.bd-input-dark::placeholder { color: rgba(255, 255, 255, 0.5); }
+.bd-input-dark:focus { border-color: #8b7fd6; }
+.bd-input-dark option { color: #16131f; }
+
+/* ── Field label ─────────────────────────────────────────────────────────── */
+.bd-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-body-3);
+  margin-bottom: 8px;
+}
+.bd-label-dark {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #cfc9dd;
+  margin-bottom: 8px;
 }
 
-.animate-slideInRight {
-  animation: slideInRight 0.8s ease-out forwards;
+/* ── Animations ──────────────────────────────────────────────────────────── */
+@keyframes bdfade {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-
-/* Custom Utilities */
-.animation-delay-200 {
-  animation-delay: 200ms;
-}
-
-.animation-delay-400 {
-  animation-delay: 400ms;
-}
-
-.animation-delay-600 {
-  animation-delay: 600ms;
-}
-
-/* Text shadows for better readability */
-.text-shadow-lg {
-  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
-}
-
-.text-shadow-xl {
-  text-shadow: 0 6px 20px rgba(0, 0, 0, 0.9);
-}
+.animate-fadeIn { animation: bdfade 0.7s ease both; }
+.animate-fadeInUp { animation: bdfade 0.7s ease both; }

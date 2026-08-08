@@ -1,173 +1,118 @@
 import Link from "next/link";
-import { Phone, Mail, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
-import Image from "next/image";
+import { MapPin, Phone, Mail, Facebook, Instagram, Twitter } from "lucide-react";
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
+  const year = new Date().getFullYear();
+
+  const explore = [
+    { href: "/", label: "Home" },
+    { href: "/about", label: "About Us" },
+    { href: "/services/wedding-packages", label: "Wedding Packages" },
+    { href: "/services/event-packages", label: "Event Packages" },
+    { href: "/services/equipment", label: "Equipment" },
+    { href: "/contact", label: "Contact" },
+  ];
 
   return (
-    <footer className="bg-gray-900 text-white">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Company Info */}
-          <div className="space-y-4">
-             <Link href="/" className="flex items-center space-x-2">
-              <div className="rounded-lg flex items-center justify-center">
-                  <Image
-                    src="/images/logo-long.png"
-                    alt="Big Dunn Entertainment"
-                    width={1200}
-                    height={600}
-                    className="h-10 w-auto"
-                />
-              </div>
-          </Link>
-            <h3 className="text-2xl font-bold text-secondary-green">BIG DUNN</h3>
-            <p className="text-sm text-primary-purple uppercase tracking-wider">
-              Entertainment
-            </p>
-            <p className="text-gray-400 text-sm">
-              Ideas for Life
-            </p>
-            <p className="text-gray-400 text-sm">
-              Premium audio visual and event equipment rentals in the Bahamas.
+    <footer className="relative overflow-hidden" style={{ background: "#100c1c", color: "#cfc9dd" }}>
+      {/* Gradient top rule */}
+      <div style={{ height: "3px", width: "100%", background: "linear-gradient(90deg,#6a26c9 0%,#2f39e8 55%,#6a26c9 100%)" }} />
+
+      <div className="max-w-[1240px] mx-auto px-6 pt-[72px]">
+        <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr_1.2fr] gap-14">
+          {/* Brand */}
+          <div>
+            <Link href="/" className="inline-flex items-baseline gap-3 no-underline">
+              <span className="bd-display text-white text-[26px] tracking-[0.02em] leading-none">BIG DUNN</span>
+            </Link>
+            <div className="mt-2.5 mb-1 text-[12px] font-bold tracking-[0.42em]" style={{ color: "#8b7fd6" }}>
+              ENTERTAINMENT
+            </div>
+            <div className="flex items-center gap-2.5 mt-1.5 mb-[22px]">
+              <span style={{ height: "1px", width: "34px", background: "linear-gradient(90deg,transparent,#6a26c9)" }} />
+              <span className="italic text-[12.5px] tracking-[0.24em]" style={{ color: "#6a26c9" }}>
+                IDEAS FOR LIFE
+              </span>
+            </div>
+            <p className="text-sm leading-[1.7] max-w-[320px] m-0" style={{ color: "#9a94ac" }}>
+              Nassau&apos;s premier event equipment and entertainment company — professional audio, lighting, staging
+              and production for weddings, concerts and corporate events across The Bahamas.
             </p>
           </div>
 
-          {/* Quick Links */}
+          {/* Explore */}
           <div>
-            <h4 className="text-lg font-semibold mb-4 text-primary-purple">
-              Quick Links
-            </h4>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/" className="text-gray-400 hover:text-secondary-green transition-colors">
-                  Home
+            <h4 className="bd-display text-white text-[13px] tracking-[0.08em] mb-[22px]">EXPLORE</h4>
+            <div className="flex flex-col gap-[13px]">
+              {explore.map((l) => (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  className="text-sm no-underline transition-colors"
+                  style={{ color: "#9a94ac" }}
+                >
+                  {l.label}
                 </Link>
-              </li>
-              <li>
-                <Link href="/about" className="text-gray-400 hover:text-secondary-green transition-colors">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link href="/services/wedding-packages" className="text-gray-400 hover:text-secondary-green transition-colors">
-                  Wedding Packages
-                </Link>
-              </li>
-              <li>
-                <Link href="/services/event-packages" className="text-gray-400 hover:text-secondary-green transition-colors">
-                  Event Packages
-                </Link>
-              </li>
-              <li>
-                <Link href="/services/equipment" className="text-gray-400 hover:text-secondary-green transition-colors">
-                  Equipment
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="text-gray-400 hover:text-secondary-green transition-colors">
-                  Contact
-                </Link>
-              </li>
-            </ul>
+              ))}
+            </div>
           </div>
 
-          {/* Services
+          {/* Get in touch */}
           <div>
-            <h4 className="text-lg font-semibold mb-4 text-primary-purple">
-              Services
-            </h4>
-            <ul className="space-y-2 text-gray-400 text-sm">
-              <li>DJ Services</li>
-              <li>Sound Systems</li>
-              <li>Lighting & Effects</li>
-              <li>Staging & Truss</li>
-              <li>LED Screens</li>
-              <li>Event Furniture</li>
-            </ul>
-          </div> */}
-
-          {/* Contact Info */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4 text-primary-purple">
-              Contact Us
-            </h4>
-            <ul className="space-y-3">
-              <li className="flex items-start space-x-3">
-                <MapPin className="text-secondary-green flex-shrink-0 mt-1" size={18} />
-                <span className="text-gray-400 text-sm">
+            <h4 className="bd-display text-white text-[13px] tracking-[0.08em] mb-[22px]">GET IN TOUCH</h4>
+            <div className="flex flex-col gap-4">
+              <div className="flex items-start gap-3">
+                <MapPin size={17} style={{ color: "#8b7fd6" }} className="flex-shrink-0 mt-0.5" />
+                <span className="text-sm leading-[1.5]" style={{ color: "#9a94ac" }}>
                   Carew Street, Nassau, Bahamas
                 </span>
-              </li>
-              <li className="flex items-center space-x-3">
-                <Phone className="text-secondary-green flex-shrink-0" size={18} />
-                <a
-                  href="tel:1-242-449-3010"
-                  className="text-gray-400 hover:text-secondary-green transition-colors text-sm"
-                >
-                  1-242-449-3010
-                </a>
-              </li>
-              <li className="flex items-center space-x-3">
-                <Mail className="text-secondary-green flex-shrink-0" size={18} />
-                <a
-                  href="mailto:info@bigdunnentertainment.com"
-                  className="text-gray-400 hover:text-secondary-green transition-colors text-sm"
-                >
-                  info@bigdunnentertainment.com
-                </a>
-              </li>
-            </ul>
-
-            {/* Social Media */}
-            <div className="mt-6">
-              <h5 className="text-sm font-semibold mb-3">Follow Us</h5>
-              <div className="flex space-x-4">
-                <a
-                  href="https://www.facebook.com/bigdunnentertainment"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-secondary-green transition-colors"
-                  aria-label="Facebook"
-                >
-                  <Facebook size={20} />
-                </a>
-                <a
-                  href="https://www.instagram.com/bigdunnentertainment"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-secondary-green transition-colors"
-                  aria-label="Instagram"
-                >
-                  <Instagram size={20} />
-                </a>
-                <a
-                  href="https://twitter.com/bigdunnent"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-secondary-green transition-colors"
-                  aria-label="Twitter"
-                >
-                  <Twitter size={20} />
-                </a>
+              </div>
+              <a href="tel:+12424493010" className="flex items-center gap-3 no-underline" style={{ color: "#9a94ac" }}>
+                <Phone size={17} style={{ color: "#8b7fd6" }} className="flex-shrink-0" />
+                <span className="text-sm">1-242-449-3010</span>
+              </a>
+              <a
+                href="mailto:info@bigdunnentertainment.com"
+                className="flex items-center gap-3 no-underline"
+                style={{ color: "#9a94ac" }}
+              >
+                <Mail size={17} style={{ color: "#8b7fd6" }} className="flex-shrink-0" />
+                <span className="text-sm">info@bigdunnentertainment.com</span>
+              </a>
+              <div className="flex gap-3 mt-2">
+                {[
+                  { href: "https://www.facebook.com/bigdunnentertainment", Icon: Facebook, label: "Facebook" },
+                  { href: "https://www.instagram.com/bigdunnentertainment", Icon: Instagram, label: "Instagram" },
+                  { href: "https://twitter.com/bigdunnent", Icon: Twitter, label: "Twitter" },
+                ].map(({ href, Icon, label }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="inline-flex items-center justify-center w-10 h-10 rounded-[10px] no-underline transition-all hover:-translate-y-0.5"
+                    style={{ border: "1px solid rgba(255,255,255,0.14)", color: "#cfc9dd" }}
+                  >
+                    <Icon size={17} />
+                  </a>
+                ))}
               </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400 text-sm">
-          <p>
-            © {currentYear} Big Dunn Entertainment. All rights reserved. |{" "}
-            <Link href="/privacy" className="hover:text-secondary-green transition-colors">
-              Privacy Policy
-            </Link>{" "}
-            |{" "}
-            <Link href="/terms" className="hover:text-secondary-green transition-colors">
-              Terms of Service
-            </Link>
-          </p>
+        {/* Bottom bar */}
+        <div
+          className="mt-14 py-[26px] flex justify-between items-center flex-wrap gap-3"
+          style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
+        >
+          <span className="text-[13px]" style={{ color: "#6f6980" }}>
+            © {year} Big Dunn Entertainment. All rights reserved.
+          </span>
+          <span className="text-[13px]" style={{ color: "#6f6980" }}>
+            Nassau · The Bahamas
+          </span>
         </div>
       </div>
     </footer>
