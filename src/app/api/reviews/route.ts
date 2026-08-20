@@ -1,62 +1,40 @@
 import { NextResponse } from 'next/server';
+import {
+  captureReview,
+  HubSpotConfigurationError,
+  logHubSpotError,
+} from '@/src/lib/hubspot';
+import { reviewSchema } from '@/src/lib/lead-validation';
+
+export const runtime = 'nodejs';
 
 export async function POST(request: Request) {
+  let payload: unknown;
+
   try {
-    const { name, email, eventType, rating, review, suggestions } = await request.json();
+    payload = await request.json();
+  } catch {
+    return NextResponse.json({ error: 'Invalid request body' }, { status: 400 });
+  }
 
-    // Validate required fields
-    if (!name || !email || !rating || !review) {
-      return NextResponse.json(
-        { error: 'Missing required fields' },
-        { status: 400 }
-      );
-    }
-
-    if (!email.includes('@')) {
-      return NextResponse.json(
-        { error: 'Invalid email address' },
-        { status: 400 }
-      );
-    }
-
-    // TODO: Store review in database
-    // Example with a database:
-    // await prisma.review.create({
-    //   data: {
-    //     name,
-    //     email,
-    //     eventType,
-    //     rating,
-    //     review,
-    //     suggestions,
-    //     status: 'pending', // Reviews start as pending until approved
-    //     submittedAt: new Date(),
-    //   }
-    // });
-
-    // Log the review for now
-    console.log('New review submitted:', {
-      name,
-      email,
-      eventType,
-      rating,
-      review,
-      suggestions,
-      submittedAt: new Date().toISOString(),
-    });
-
-    // TODO: Send notification email to admin
-    // You can use a service like Resend, SendGrid, or Nodemailer
-
+  const parsed = reviewSchema.safeParse(payload);
+  if (!parsed.success) {
     return NextResponse.json(
-      { message: 'Review submitted successfully' },
-      { status: 200 }
+      { error: 'Please check the review fields and try again.' },
+      { status: 400 },
     );
+  }
+
+  if (parsed.data.website) {
+    return NextResponse.json({ message: 'Review submitted successfully' }, { status: 202 });
+  }
+
+  try {
+    await captureReview(parsed.data, request.headers.get('referer') || undefined);
+    return NextResponse.json({ message: 'Review submitted successfully' });
   } catch (error) {
-    console.error('Review submission error:', error);
-    return NextResponse.json(
-      { error: 'Failed to submit review' },
-      { status: 500 }
-    );
+    logHubSpotError('HubSpot review capture failed', error);
+    const status = error instanceof HubSpotConfigurationError ? 503 : 502;
+    return NextResponse.json({ error: 'Review submission is temporarily unavailable.' }, { status });
   }
 }

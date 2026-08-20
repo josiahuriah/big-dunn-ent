@@ -11,6 +11,7 @@ export default function ReviewForm() {
     rating: 0,
     review: '',
     suggestions: '',
+    website: '',
   });
 
   const [hoveredRating, setHoveredRating] = useState(0);
@@ -32,7 +33,7 @@ export default function ReviewForm() {
       });
       if (response.ok) {
         setSubmitStatus('success');
-        setFormData({ name: '', email: '', eventType: '', rating: 0, review: '', suggestions: '' });
+        setFormData({ name: '', email: '', eventType: '', rating: 0, review: '', suggestions: '', website: '' });
         setTimeout(() => setSubmitStatus('idle'), 6000);
       } else {
         setSubmitStatus('error');
@@ -92,6 +93,18 @@ export default function ReviewForm() {
             className="rounded-[20px] p-10"
             style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', backdropFilter: 'blur(6px)' }}
           >
+            <div className="absolute left-[-10000px] h-px w-px overflow-hidden" aria-hidden="true">
+              <label htmlFor="review-website">Website</label>
+              <input
+                type="text"
+                id="review-website"
+                name="website"
+                value={formData.website}
+                onChange={handleChange}
+                tabIndex={-1}
+                autoComplete="off"
+              />
+            </div>
             <div className="grid md:grid-cols-2 gap-5 mb-5">
               <div>
                 <label htmlFor="name" className="bd-label-dark">Your Name</label>

@@ -1,35 +1,40 @@
 import { NextResponse } from 'next/server';
+import {
+  HubSpotConfigurationError,
+  logHubSpotError,
+  subscribeToNewsletter,
+} from '@/src/lib/hubspot';
+import { newsletterSchema } from '@/src/lib/lead-validation';
+
+export const runtime = 'nodejs';
 
 export async function POST(request: Request) {
+  let payload: unknown;
+
   try {
-    const { email } = await request.json();
+    payload = await request.json();
+  } catch {
+    return NextResponse.json({ error: 'Invalid request body' }, { status: 400 });
+  }
 
-    if (!email || !email.includes('@')) {
-      return NextResponse.json(
-        { error: 'Invalid email address' },
-        { status: 400 }
-      );
-    }
-
-    // TODO: Integrate with your email service provider (Mailchimp, SendGrid, etc.)
-    // For now, we'll log it and return success
-    console.log('New email subscription:', email);
-
-    // You can store this in a database or send to an email service
-    // Example with a database:
-    // await prisma.emailSubscriber.create({
-    //   data: { email, subscribedAt: new Date() }
-    // });
-
+  const parsed = newsletterSchema.safeParse(payload);
+  if (!parsed.success) {
     return NextResponse.json(
-      { message: 'Successfully subscribed' },
-      { status: 200 }
+      { error: 'Enter a valid email address and confirm your consent.' },
+      { status: 400 },
     );
+  }
+
+  if (parsed.data.website) {
+    return NextResponse.json({ message: 'Successfully subscribed' });
+  }
+
+  try {
+    await subscribeToNewsletter(parsed.data.email);
+    return NextResponse.json({ message: 'Successfully subscribed' });
   } catch (error) {
-    console.error('Subscription error:', error);
-    return NextResponse.json(
-      { error: 'Failed to process subscription' },
-      { status: 500 }
-    );
+    logHubSpotError('HubSpot newsletter subscription failed', error);
+    const status = error instanceof HubSpotConfigurationError ? 503 : 502;
+    return NextResponse.json({ error: 'Subscription is temporarily unavailable.' }, { status });
   }
 }

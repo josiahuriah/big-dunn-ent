@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Big Dunn Entertainment website
 
-## Getting Started
+Next.js website for Big Dunn Entertainment. Website quote requests, newsletter subscriptions, and reviews are captured in HubSpot so the CRM is the operational system of record.
 
-First, run the development server:
+## HubSpot behavior
+
+- Quote requests create or update a contact and add the complete event request to its timeline.
+- When a deal pipeline and stage are configured, a quote request also creates an associated deal.
+- Newsletter signups create or update a contact and record explicit email consent against the configured HubSpot subscription type.
+- Reviews create or update a contact and add the review to its timeline.
+- HubSpot credentials are used only by server-side route handlers and are never exposed to the browser.
+
+## Configure HubSpot
+
+1. Create a private app for the Big Dunn HubSpot account.
+2. Grant `crm.objects.contacts.read` and `crm.objects.contacts.write`. If quote requests should create deals, also grant `crm.objects.deals.read` and `crm.objects.deals.write`. For newsletter opt-ins and verification from a legacy private app, grant `communication_preferences.read_write`.
+3. Copy `.env.example` to `.env.local` and set `HUBSPOT_ACCESS_TOKEN`.
+4. Set `HUBSPOT_NEWSLETTER_SUBSCRIPTION_ID` to the numeric email subscription type ID.
+5. Optionally set both `HUBSPOT_DEAL_PIPELINE_ID` and `HUBSPOT_DEAL_STAGE_ID` using their internal HubSpot IDs.
+6. Optionally set `HUBSPOT_OWNER_ID` to assign new records to one HubSpot owner.
+
+Use the same names as encrypted environment variables in the production hosting platform. Never prefix these variables with `NEXT_PUBLIC_`.
+
+## Vercel Web Analytics
+
+The root layout includes Vercel's `Analytics` component, so page views and client-side route changes are captured once Web Analytics is enabled for the Vercel project.
+
+1. Open the project in Vercel and select **Analytics** in the sidebar.
+2. Click **Enable** for Web Analytics.
+3. Deploy the updated application to Vercel.
+4. Visit the production site, then confirm that the Analytics dashboard changes from awaiting data after Vercel processes the first page view.
+
+No analytics environment variable is required. See the [Vercel Web Analytics quickstart](https://vercel.com/docs/analytics/quickstart) for dashboard and deployment details.
+
+## Local development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Verification
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm test
+npm run lint
+npm run build
+```
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The broader WhatsApp Business and QuickBooks rollout is documented in [docs/crm-integrations.md](docs/crm-integrations.md).

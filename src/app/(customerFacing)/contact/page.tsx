@@ -5,21 +5,40 @@ import { MapPin, Phone, Mail, Clock, Send, CheckCircle } from 'lucide-react';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
-    name: '', email: '', phone: '', eventType: '', eventDate: '', guests: '', message: '',
+    name: '', email: '', phone: '', eventType: '', eventDate: '', guests: '', message: '', website: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitError, setSubmitError] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
+    setSubmitStatus('idle');
+    setSubmitError('');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      const result = (await response.json().catch(() => ({}))) as { error?: string };
+
+      if (!response.ok) {
+        throw new Error(result.error || 'We could not send your request. Please try again.');
+      }
+
       setSubmitStatus('success');
-      setFormData({ name: '', email: '', phone: '', eventType: '', eventDate: '', guests: '', message: '' });
-      if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'smooth' });
+      setFormData({ name: '', email: '', phone: '', eventType: '', eventDate: '', guests: '', message: '', website: '' });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       setTimeout(() => setSubmitStatus('idle'), 6000);
-    }, 1500);
+    } catch (error) {
+      setSubmitStatus('error');
+      setSubmitError(error instanceof Error ? error.message : 'We could not send your request. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -111,6 +130,18 @@ export default function ContactPage() {
             )}
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+              <div className="absolute left-[-10000px] h-px w-px overflow-hidden" aria-hidden="true">
+                <label htmlFor="website">Website</label>
+                <input
+                  type="text"
+                  id="website"
+                  name="website"
+                  value={formData.website}
+                  onChange={handleChange}
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
               <div className="grid sm:grid-cols-2 gap-5">
                 <div>
                   <label htmlFor="name" className="bd-label">Full Name *</label>
@@ -148,6 +179,11 @@ export default function ContactPage() {
                 <label htmlFor="message" className="bd-label">Tell us about your event *</label>
                 <textarea id="message" name="message" value={formData.message} onChange={handleChange} required rows={5} className="bd-input resize-none" placeholder="Share your vision, equipment needs, special requirements, or any questions you have..." />
               </div>
+              {submitStatus === 'error' && (
+                <div className="rounded-[10px] p-3 text-sm" role="alert" style={{ background: 'rgba(220,38,38,0.06)', border: '1px solid rgba(220,38,38,0.25)', color: '#b91c1c' }}>
+                  {submitError}
+                </div>
+              )}
               <button type="submit" disabled={isSubmitting} className="bd-btn bd-btn-gradient bd-btn-block !p-4 disabled:opacity-50 disabled:cursor-not-allowed">
                 {isSubmitting ? (
                   <>

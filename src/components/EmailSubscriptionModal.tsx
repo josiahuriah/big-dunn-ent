@@ -6,6 +6,8 @@ import { X, Mail, Sparkles } from 'lucide-react';
 export default function EmailSubscriptionModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [email, setEmail] = useState('');
+  const [consent, setConsent] = useState(false);
+  const [website, setWebsite] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
@@ -23,7 +25,7 @@ export default function EmailSubscriptionModal() {
       const response = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, consent, website }),
       });
       if (response.ok) {
         setSubmitStatus('success');
@@ -80,6 +82,17 @@ export default function EmailSubscriptionModal() {
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="absolute left-[-10000px] h-px w-px overflow-hidden" aria-hidden="true">
+                  <label htmlFor="newsletter-website">Website</label>
+                  <input
+                    type="text"
+                    id="newsletter-website"
+                    value={website}
+                    onChange={(e) => setWebsite(e.target.value)}
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                </div>
                 <div className="relative">
                   <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-muted" size={20} />
                   <input
@@ -93,13 +106,24 @@ export default function EmailSubscriptionModal() {
                   />
                 </div>
 
+                <label className="flex items-start gap-3 text-xs leading-[1.5] text-body cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={consent}
+                    onChange={(e) => setConsent(e.target.checked)}
+                    required
+                    className="mt-0.5 h-4 w-4 accent-purple"
+                  />
+                  <span>I agree to receive marketing emails from Big Dunn Entertainment. I can unsubscribe at any time.</span>
+                </label>
+
                 {submitStatus === 'error' && (
                   <div className="rounded-lg p-3 text-sm" style={{ background: 'rgba(220,38,38,0.06)', border: '1px solid rgba(220,38,38,0.25)', color: '#b91c1c' }}>
                     Oops! Something went wrong. Please try again.
                   </div>
                 )}
 
-                <button type="submit" disabled={isSubmitting} className="bd-btn bd-btn-gradient bd-btn-block !py-4 disabled:opacity-50 disabled:cursor-not-allowed">
+                <button type="submit" disabled={isSubmitting || !consent} className="bd-btn bd-btn-gradient bd-btn-block !py-4 disabled:opacity-50 disabled:cursor-not-allowed">
                   {isSubmitting ? (
                     <>
                       <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white" />
