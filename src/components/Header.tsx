@@ -69,7 +69,7 @@ export default function Header() {
             );
           })}
           <Link href="/quote" className="bd-btn bd-btn-primary !px-5 !py-3 text-[12px]">
-            Build a quote <ArrowRight size={14} />
+            Get a quote <ArrowRight size={14} />
           </Link>
         </nav>
 
@@ -93,7 +93,7 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
-            <Link href="/quote" className="bd-btn bd-btn-primary mt-4 w-full">Build a quote <ArrowRight size={16} /></Link>
+            <Link href="/quote" className="bd-btn bd-btn-primary mt-4 w-full">Get a quote <ArrowRight size={16} /></Link>
           </div>
         </nav>
       )}

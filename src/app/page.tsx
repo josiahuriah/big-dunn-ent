@@ -17,31 +17,15 @@ export default function HomePage() {
   const slides = [
     {
       image: '/images/Bigdunn%20Photos/concert-2.jpeg',
-      kicker: 'Event production · Nassau, Bahamas',
-      title: 'Big Moments. Built Right.',
-      subtitle: 'Sound, lighting, staging, visuals, power, and event rentals—planned as one dependable production.',
-      cta: { text: 'Build Your Quote', href: '/quote' },
     },
     {
       image: '/images/Bigdunn%20Photos/wedding-decor-2.jpeg',
-      kicker: 'Weddings',
-      title: 'Make the Room Feel Like Yours.',
-      subtitle: 'Ceremony sound, reception lighting, DJ services, monograms, and effects built around your day.',
-      cta: { text: 'Explore Weddings', href: '/events/weddings' },
     },
     {
       image: '/images/Bigdunn%20Photos/concert-5.jpeg',
-      kicker: 'Concerts & festivals',
-      title: 'Production That Carries.',
-      subtitle: 'Scalable audio, lighting, staging, video, and power for live audiences across The Bahamas.',
-      cta: { text: 'View Event Packages', href: '/services/event-packages' },
     },
     {
       image: '/images/Bigdunn%20Photos/exlusive-setup.jpeg',
-      kicker: 'Private celebrations',
-      title: 'A Setting Worth Remembering.',
-      subtitle: 'Flexible production and rentals for birthdays, anniversaries, dinners, and milestone gatherings.',
-      cta: { text: 'Plan Your Event', href: '/events/private-celebrations' },
     },
   ];
 
@@ -128,39 +112,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bd-section bg-dark">
-        <div className="bd-container grid gap-12 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
-          <div className="relative mx-auto w-full max-w-[500px]">
-            <div className="absolute inset-0 rounded-[30px] bg-gradient-to-br from-purple/30 to-blue/15 blur-2xl" />
-            <div className="relative overflow-hidden rounded-[24px] border border-white/10 bg-[#161125] shadow-2xl">
-              <Image
-                src="/images/Bigdunn%20Photos/generator-rental.jpeg"
-                alt="Big Dunn generator rental rates flyer"
-                width={1080}
-                height={1350}
-                className="h-auto w-full"
-                sizes="(max-width: 1024px) 90vw, 42vw"
-              />
-            </div>
-          </div>
-
-          <div>
-            <div className="mb-5 flex items-center gap-3.5">
-              <span className="bd-kline" />
-              <span className="bd-kicker-light">Featured rental</span>
-            </div>
-            <h2 className="bd-display m-0 text-white" style={{ fontSize: 'clamp(28px,4vw,50px)', lineHeight: 1.12 }}>
-              Reliable power for events of every size.
-            </h2>
-            <div className="mt-8">
-              <Link href="/quote?eventType=Generator%20Rental" className="bd-btn bd-btn-primary">
-                GET A QUOTE <ArrowRight size={16} />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section className="bd-section bg-white" id="events">
         <div className="bd-container">
           <div className="mb-12 text-center">
@@ -212,7 +163,7 @@ export default function HomePage() {
               </h2>
             </div>
             <div className="relative flex flex-col gap-3 sm:flex-row md:flex-col">
-              <Link href="/quote" className="bd-btn bd-btn-white">Build your quote <ArrowRight size={16} /></Link>
+              <Link href="/quote" className="bd-btn bd-btn-white">Get a quote <ArrowRight size={16} /></Link>
               <a href="tel:+12424493010" className="bd-btn bd-btn-glass"><Phone size={16} /> 1-242-449-3010</a>
             </div>
           </div>
