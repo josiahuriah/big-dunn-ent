@@ -18,6 +18,18 @@ type QuoteDetails = ContactDetails & {
   eventDate: string;
   guests: string;
   message: string;
+  eventTime?: string;
+  setupTime?: string;
+  venue?: string;
+  island?: string;
+  services?: string[];
+  addOns?: string[];
+  packageName?: string;
+  budget?: string;
+  contactPreference?: string;
+  referralSource?: string;
+  estimatedTotal?: number;
+  pricingNote?: string;
 };
 
 type ReviewDetails = ContactDetails & {
@@ -224,7 +236,37 @@ function renderNote(title: string, rows: Array<[string, string | number | undefi
   return `<p><strong>${escapeHtml(title)}</strong></p><ul>${items}</ul>`;
 }
 
-async function addContactNote(contactId: string, body: string) {
+function quoteRows(details: QuoteDetails, sourcePage?: string) {
+  return [
+    ['Event type', details.eventType],
+    ['Selected package', details.packageName],
+    ['Website starting estimate', details.estimatedTotal !== undefined ? `$${details.estimatedTotal.toLocaleString('en-US')}` : undefined],
+    ['Pricing note', details.pricingNote],
+    ['Requested services', details.services?.join(', ')],
+    ['Add-ons', details.addOns?.join(', ')],
+    ['Event date', details.eventDate],
+    ['Event time', details.eventTime],
+    ['Requested setup time', details.setupTime],
+    ['Expected guests', details.guests],
+    ['Venue', details.venue],
+    ['Island / area', details.island],
+    ['Budget range', details.budget],
+    ['Preferred contact method', details.contactPreference],
+    ['Phone', details.phone],
+    ['How they heard about us', details.referralSource],
+    ['Additional notes', details.message],
+    ['Source page', sourcePage?.slice(0, 500)],
+  ] satisfies Array<[string, string | number | undefined]>;
+}
+
+function renderPlainTextSummary(details: QuoteDetails, sourcePage?: string) {
+  return quoteRows(details, sourcePage)
+    .filter(([, value]) => value !== undefined && value !== '')
+    .map(([label, value]) => `${label}: ${value}`)
+    .join('\n');
+}
+
+async function addContactNote(contactId: string, body: string, dealId?: string) {
   const ownerId = getOwnerId();
   const properties: Record<string, string> = {
     hs_timestamp: new Date().toISOString(),
@@ -233,38 +275,55 @@ async function addContactNote(contactId: string, body: string) {
 
   if (ownerId) properties.hubspot_owner_id = ownerId;
 
+  const associations = [
+    {
+      to: { id: contactId },
+      types: [
+        {
+          associationCategory: 'HUBSPOT_DEFINED',
+          associationTypeId: 202,
+        },
+      ],
+    },
+  ];
+
+  if (dealId) {
+    associations.push({
+      to: { id: dealId },
+      types: [
+        {
+          associationCategory: 'HUBSPOT_DEFINED',
+          associationTypeId: 214,
+        },
+      ],
+    });
+  }
+
   return hubspotRequest<HubSpotRecord>(
     `/crm/objects/${HUBSPOT_API_VERSION}/notes`,
     {
       method: 'POST',
       body: JSON.stringify({
         properties,
-        associations: [
-          {
-            to: { id: contactId },
-            types: [
-              {
-                associationCategory: 'HUBSPOT_DEFINED',
-                associationTypeId: 202,
-              },
-            ],
-          },
-        ],
+        associations,
       }),
     },
   );
 }
 
-async function createDeal(contactId: string, details: QuoteDetails) {
+async function createDeal(contactId: string, details: QuoteDetails, sourcePage?: string) {
   const configuration = getDealConfiguration();
   if (!configuration) return undefined;
 
   const properties: Record<string, string> = {
-    dealname: `${details.eventType} inquiry — ${details.name}`,
+    dealname: `${details.eventType}${details.eventDate ? ` · ${details.eventDate}` : ''} — ${details.name}`,
     pipeline: configuration.pipeline,
     dealstage: configuration.stage,
-    description: details.message,
+    description: renderPlainTextSummary(details, sourcePage),
   };
+  if (details.estimatedTotal !== undefined) {
+    properties.amount = String(details.estimatedTotal);
+  }
   const ownerId = getOwnerId();
   if (ownerId) properties.hubspot_owner_id = ownerId;
 
@@ -293,18 +352,12 @@ async function createDeal(contactId: string, details: QuoteDetails) {
 export async function captureQuoteRequest(details: QuoteDetails, sourcePage?: string) {
   getDealConfiguration();
   const contact = await upsertContact(details);
+  const deal = await createDeal(contact.id, details, sourcePage);
   const note = await addContactNote(
     contact.id,
-    renderNote('New website quote request', [
-      ['Event type', details.eventType],
-      ['Event date', details.eventDate],
-      ['Expected guests', details.guests],
-      ['Phone', details.phone],
-      ['Message', details.message],
-      ['Source page', sourcePage?.slice(0, 500)],
-    ]),
+    renderNote('New website quote request', quoteRows(details, sourcePage)),
+    deal?.id,
   );
-  const deal = await createDeal(contact.id, details);
 
   return { contactId: contact.id, noteId: note.id, dealId: deal?.id };
 }

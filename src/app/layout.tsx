@@ -19,13 +19,13 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Big Dunn Entertainment - Premium Event Equipment & Audio Visual Rentals",
-  description: "Nassau's premier event equipment rental company. Professional audio systems, lighting, staging, and entertainment solutions for weddings, concerts, and corporate events.",
+  title: "Big Dunn Entertainment | Event Production in The Bahamas",
+  description: "Professional audio, lighting, staging, video, generator power, and event rentals for weddings, concerts, corporate events, and celebrations in The Bahamas.",
   keywords: "event equipment rental, audio visual, wedding entertainment, concert staging, Nassau Bahamas, DJ services, lighting rental, sound system",
   authors: [{ name: "Big Dunn Entertainment" }],
   openGraph: {
-    title: "Big Dunn Entertainment - Premium Event Equipment Rentals",
-    description: "Professional audio, lighting, and staging equipment for unforgettable events in Nassau, Bahamas",
+    title: "Big Dunn Entertainment | Event Production in The Bahamas",
+    description: "Professional audio, lighting, staging, video, power, and event rentals planned as one dependable production.",
     url: "https://www.bigdunnentertainment.com",
     siteName: "Big Dunn Entertainment",
     locale: "en_US",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Big Dunn Entertainment",
-    description: "Premium event equipment and entertainment solutions",
+    description: "Professional event production and rentals across The Bahamas",
   },
   robots: {
     index: true,

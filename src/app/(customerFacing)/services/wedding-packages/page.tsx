@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { CheckCircle, ArrowRight, Phone, Mail } from 'lucide-react';
 
 export const metadata = {
@@ -50,18 +51,14 @@ export default function WeddingPackagesPage() {
   return (
     <>
       {/* HERO */}
-      <section className="relative overflow-hidden px-6" style={{ background: '#100c1c', paddingTop: '170px', paddingBottom: '96px' }}>
-        <div className="absolute pointer-events-none" style={{ top: '-140px', right: '-60px', width: '460px', height: '460px', borderRadius: '50%', background: 'radial-gradient(circle,rgba(106,38,201,0.4),transparent 70%)' }} />
-        <div className="absolute pointer-events-none" style={{ bottom: '-140px', left: '-80px', width: '400px', height: '400px', borderRadius: '50%', background: 'radial-gradient(circle,rgba(47,57,232,0.3),transparent 70%)' }} />
-        <div className="relative max-w-[1240px] mx-auto">
+      <section className="bd-page-hero">
+        <Image src="/images/Bigdunn%20Photos/wedding-decor-2.jpeg" alt="Big Dunn wedding reception lighting and decor" fill priority className="bd-page-hero-media" sizes="100vw" />
+        <div className="bd-container relative z-[1]">
           <div className="flex items-center gap-3.5 mb-[22px]">
             <span className="bd-kline" />
             <span className="bd-kicker-light">Weddings</span>
           </div>
-          <h1 className="bd-display text-white m-0 mb-5" style={{ fontSize: 'clamp(30px,4.4vw,56px)', lineHeight: 1.12 }}>Wedding Packages</h1>
-          <p className="font-light m-0" style={{ fontSize: 'clamp(16px,1.6vw,20px)', lineHeight: 1.6, color: '#c4bed5', maxWidth: '620px' }}>
-            Transform your special day into an unforgettable celebration with our premium wedding entertainment packages.
-          </p>
+          <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between"><div><h1 className="bd-display text-white m-0 mb-5" style={{ fontSize: 'clamp(32px,4.8vw,62px)', lineHeight: 1.08 }}>Wedding Packages</h1><p className="font-light m-0" style={{ fontSize: 'clamp(16px,1.6vw,20px)', lineHeight: 1.7, color: '#c4bed5', maxWidth: '650px' }}>Sound, lighting, monograms, DJ services, and effects—curated into clear starting points for your ceremony and reception.</p></div><div className="bd-price-lockup shrink-0"><small>Starting at</small><span className="bd-display text-[25px]">$250</span><span className="text-[11px] text-white/60">Bronze package</span></div></div>
         </div>
       </section>
 
@@ -113,6 +110,7 @@ export default function WeddingPackagesPage() {
                       <div>
                         <h3 className="bd-display text-ink text-[26px] m-0 mb-2.5">{pkg.name}</h3>
                         <p className="text-[14.5px] leading-[1.6] text-body m-0 mb-[18px]">{pkg.description}</p>
+                        <div className="mb-1 text-[10.5px] font-bold uppercase tracking-[0.16em] text-muted">Starting at</div>
                         <div className="flex items-baseline gap-2 mb-1.5">
                           <span className="bd-display text-[38px] text-purple">{pkg.price}</span>
                           <span className="text-[14px]" style={{ color: '#8b869a' }}>per event</span>
@@ -128,11 +126,11 @@ export default function WeddingPackagesPage() {
                         </div>
                       </div>
                       <div className="mt-[26px] flex flex-col gap-3">
-                        <Link href="/contact" className="bd-btn bd-btn-gradient bd-btn-block !py-[15px] text-[13.5px]">
+                        <Link href={`/quote?eventType=Wedding&package=${encodeURIComponent(pkg.name)}`} className="bd-btn bd-btn-gradient bd-btn-block !py-[15px] text-[13.5px]">
                           Book This Package
                           <ArrowRight size={17} />
                         </Link>
-                        <Link href="/contact" className="text-center text-purple font-bold text-[13.5px] no-underline hover:text-blue transition-colors">
+                        <Link href="/quote?eventType=Wedding" className="text-center text-purple font-bold text-[13.5px] no-underline hover:text-blue transition-colors">
                           Request Custom Quote
                         </Link>
                       </div>
@@ -145,6 +143,15 @@ export default function WeddingPackagesPage() {
         </section>
       ))}
 
+      <section className="bg-dark px-6 py-[88px]">
+        <div className="max-w-[1240px] mx-auto">
+          <div className="mb-10"><span className="bd-kicker-light">Real celebrations</span><h2 className="bd-display mb-0 mt-4 text-white" style={{ fontSize: 'clamp(25px,3vw,40px)' }}>Lighting that changes how the room feels.</h2></div>
+          <div className="grid auto-rows-[230px] gap-5 md:grid-cols-3 md:auto-rows-[330px]">
+            {['wedding-decor.jpeg', 'wedding-decor-3.jpeg', 'wedding-decor-4.jpeg'].map((photo, index) => <div key={photo} className={`relative overflow-hidden rounded-[20px] ${index === 0 ? 'md:col-span-2' : ''}`}><Image src={`/images/Bigdunn%20Photos/${photo}`} alt={`Big Dunn wedding production example ${index + 1}`} fill sizes={index === 0 ? '(max-width: 767px) 100vw, 66vw' : '(max-width: 767px) 100vw, 33vw'} className="object-cover" /></div>)}
+          </div>
+        </div>
+      </section>
+
       {/* CUSTOM NOTE */}
       <section className="bg-white px-6 py-[88px]">
         <div className="max-w-[1000px] mx-auto bd-cta-band px-11 py-14 text-center">
@@ -154,7 +161,7 @@ export default function WeddingPackagesPage() {
               We specialize in bespoke packages tailored to your unique vision and budget. Mix and match equipment, add special effects, or build your dream setup from scratch.
             </p>
             <div className="flex gap-3.5 justify-center flex-wrap">
-              <Link href="/contact" className="bd-btn bd-btn-white bd-btn-sm">Get Custom Quote</Link>
+              <Link href="/quote?eventType=Wedding" className="bd-btn bd-btn-white bd-btn-sm">Get Custom Quote</Link>
               <Link href="/services/equipment" className="bd-btn bd-btn-glass bd-btn-sm">View Equipment List</Link>
             </div>
           </div>
@@ -163,12 +170,12 @@ export default function WeddingPackagesPage() {
 
       {/* CONTACT CTA */}
       <section className="px-6 py-20" style={{ background: '#100c1c' }}>
-        <div className="max-w-[1100px] mx-auto grid md:grid-cols-[1.1fr_1fr] gap-12 items-center">
+        <div className="max-w-[1100px] min-w-0 mx-auto grid md:grid-cols-[1.1fr_1fr] gap-12 items-center">
           <div>
             <h3 className="bd-display text-white m-0 mb-3.5" style={{ fontSize: 'clamp(22px,2.6vw,32px)', lineHeight: 1.25 }}>Ready to Plan Your Perfect Wedding?</h3>
             <p className="text-[17px] leading-[1.6] m-0" style={{ color: '#b6afc9' }}>Our wedding specialists are here to help you create the celebration of your dreams.</p>
           </div>
-          <div className="flex flex-col gap-3.5">
+          <div className="flex min-w-0 flex-col gap-3.5">
             <a href="tel:+12424493010" className="flex items-center gap-4 px-6 py-5 rounded-[14px] no-underline transition-all hover:!border-purple" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)' }}>
               <Phone size={26} style={{ color: '#8b7fd6' }} />
               <div>
@@ -180,7 +187,7 @@ export default function WeddingPackagesPage() {
               <Mail size={26} style={{ color: '#8b7fd6' }} />
               <div>
                 <div className="text-[12.5px]" style={{ color: '#b6afc9' }}>Email us</div>
-                <div className="text-[15px] font-bold text-white">info@bigdunnentertainment.com</div>
+                <div className="break-all text-[15px] font-bold text-white">info@bigdunnentertainment.com</div>
               </div>
             </a>
           </div>

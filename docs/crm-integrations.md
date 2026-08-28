@@ -20,7 +20,7 @@ This keeps credentials off the browser and avoids building two custom integratio
 
 Implemented in this repository:
 
-- `/api/contact` validates quote requests, upserts the contact, adds an event-detail note, and optionally creates a deal.
+- `/api/contact` validates quote requests, upserts the contact, and creates an associated deal when the pipeline is configured. The complete event brief is written to the deal Description and to a note associated with both the deal and contact. Explicit package starting estimates are written to the deal Amount.
 - `/api/subscribe` upserts the contact and records explicit newsletter consent.
 - `/api/reviews` upserts the contact and logs the review on the contact timeline.
 - The server returns a real error when HubSpot is unavailable; the UI no longer reports false success.
@@ -31,7 +31,7 @@ Account setup and validation checklist:
 1. Create the HubSpot private app and configure the environment variables in `.env.example`.
 2. Choose the sales pipeline and the first stage for website quote requests.
 3. Choose the HubSpot email subscription type for the newsletter.
-4. Submit one test quote, subscription, and review, then confirm the contact, note, deal, and consent state in HubSpot.
+4. Submit one approved test quote, subscription, and review. On the quote deal, confirm the Description contains package, services, date/time, venue, guest count, budget, contact preference, and notes; confirm the activity note is visible on both the deal and associated contact.
 
 ## Phase 2: WhatsApp Business
 

@@ -16,11 +16,17 @@ test('quote requests are normalized before reaching HubSpot', () => {
     eventDate: '2026-12-19',
     guests: '150',
     message: 'We need sound, lighting, and staging for our reception.',
+    venue: 'Ocean Club',
+    services: ['Audio', 'Lighting'],
+    packageName: 'Gold',
+    budget: '$1,500–$5,000',
+    estimatedTotal: 1300,
   });
 
   assert.equal(result.name, 'Jane Doe');
   assert.equal(result.email, 'jane@example.com');
   assert.equal(result.website, '');
+  assert.deepEqual(result.services, ['Audio', 'Lighting']);
 });
 
 test('quote requests reject impossible dates and guest counts', () => {
@@ -114,6 +120,18 @@ test('quote capture writes a contact, timeline note, and associated deal', async
     eventDate: '2026-12-19',
     guests: '150',
     message: 'We need sound and lighting for our reception.',
+    eventTime: '18:00',
+    setupTime: '12:00',
+    venue: 'Ocean Club',
+    island: 'New Providence',
+    services: ['Audio', 'Lighting', 'DJ Services'],
+    addOns: ['Connection service'],
+    packageName: 'Gold',
+    budget: '$1,500–$5,000',
+    contactPreference: 'WhatsApp',
+    referralSource: 'Instagram',
+    estimatedTotal: 1400,
+    pricingNote: 'Website starting price; final scope subject to review.',
   });
 
   assert.deepEqual(result, {
@@ -123,13 +141,20 @@ test('quote capture writes a contact, timeline note, and associated deal', async
   });
   assert.equal(calls.length, 3);
 
-  const noteRequest = JSON.parse(calls[1].body || '{}');
-  assert.equal(noteRequest.associations[0].types[0].associationTypeId, 202);
-  assert.match(noteRequest.properties.hs_note_body, /Wedding/);
-
-  const dealRequest = JSON.parse(calls[2].body || '{}');
+  const dealRequest = JSON.parse(calls[1].body || '{}');
   assert.equal(dealRequest.associations[0].types[0].associationTypeId, 3);
   assert.equal(dealRequest.properties.pipeline, 'sales-pipeline');
+  assert.equal(dealRequest.properties.amount, '1400');
+  assert.match(dealRequest.properties.description, /Selected package: Gold/);
+  assert.match(dealRequest.properties.description, /Venue: Ocean Club/);
+  assert.match(dealRequest.properties.description, /Requested services: Audio, Lighting, DJ Services/);
+
+  const noteRequest = JSON.parse(calls[2].body || '{}');
+  assert.equal(noteRequest.associations[0].types[0].associationTypeId, 202);
+  assert.equal(noteRequest.associations[1].types[0].associationTypeId, 214);
+  assert.equal(noteRequest.associations[1].to.id, 'deal-1');
+  assert.match(noteRequest.properties.hs_note_body, /Wedding/);
+  assert.match(noteRequest.properties.hs_note_body, /Ocean Club/);
 });
 
 test('newsletter capture records explicit consent in HubSpot', async (t) => {

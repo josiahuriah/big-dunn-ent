@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { Phone, ArrowRight, Mic, Lightbulb, Layers, Armchair, Sparkles, Plug, CheckCircle } from 'lucide-react';
+import Image from 'next/image';
+import { ArrowRight, Mic, Lightbulb, Layers, Armchair, Sparkles, Plug, CheckCircle } from 'lucide-react';
 
 export const metadata = {
   title: 'Equipment Inventory - Big Dunn Entertainment | Professional AV Equipment Rental',
@@ -7,16 +8,18 @@ export const metadata = {
     'Browse our comprehensive inventory of professional audio, lighting, staging, and event equipment available for rent in Nassau, Bahamas.',
 };
 
-type Item = { name: string; quantity: string; image: string; description: string };
+type Item = { name: string; quantity: string; image: string; description: string; fit?: 'cover' | 'contain'; isNew?: boolean };
 const categories: { id: string; title: string; Icon: typeof Mic; items: Item[] }[] = [
   { id: 'audio', title: 'Professional Audio', Icon: Mic, items: [
-    { name: 'RCF Stage Monitor', quantity: '16', image: '/images/equipment/stage-monitor.jpg', description: 'Professional stage monitors for crystal-clear on-stage sound.' },
-    { name: 'RCF HDL Line Arrays', quantity: '30', image: '/images/equipment/line-arrays.jpg', description: 'Premium line array speakers for exceptional coverage.' },
+    { name: 'RCF HDL 30 Line Array', quantity: 'Available', image: '/images/Bigdunn%20Photos/equipment/RCF-HDL-30-Line-Arrays.jpeg', description: 'Touring-grade line-array module for powerful, even audience coverage.', fit: 'contain', isNew: true },
+    { name: 'RCF HDL 20 Line Array', quantity: 'Available', image: '/images/Bigdunn%20Photos/equipment/RCF-HDL-20-Line-Arrays.jpeg', description: 'Compact active line-array module for scalable event sound systems.', fit: 'contain', isNew: true },
+    { name: 'Yorkville EXM10 Monitor', quantity: 'Available', image: '/images/Bigdunn%20Photos/equipment/Yorkville-EXM10-Monitor.jpeg', description: 'Portable battery-powered monitor for stages, ceremonies, and presentations.', fit: 'contain', isNew: true },
+    { name: 'Yorkville EXM Tower', quantity: 'Available', image: '/images/Bigdunn%20Photos/equipment/Yorkville-EXM-Tower-Bluetooth-Speaker.jpeg', description: 'Portable column speaker with Bluetooth for compact event setups.', fit: 'contain', isNew: true },
     { name: 'RCF Double 18" Subs', quantity: '12', image: '/images/equipment/subs.jpeg', description: 'Powerful subwoofers for deep, impactful bass.' },
     { name: 'RCF Column Arrays 44', quantity: '4', image: '/images/equipment/column-arrays.jpg', description: 'Versatile column arrays for various venue sizes.' },
     { name: 'QSC Monitor', quantity: '4', image: '/images/equipment/qsc-monitor.jpeg', description: 'High-quality QSC stage monitoring systems.' },
-    { name: 'Shure Wireless Microphones', quantity: '7', image: '/images/equipment/wireless-mic.jpg', description: 'Professional wireless microphone systems.' },
-    { name: 'Pioneer DJ Controllers', quantity: '5', image: '/images/equipment/dj-controller.png', description: 'Professional DJ controllers and mixing equipment.' },
+    { name: 'Shure Wireless SLX3 Microphone', quantity: 'Available', image: '/images/Bigdunn%20Photos/equipment/Shure-Wireless-SLX3-Mic.jpeg', description: 'Professional wireless microphone system for clear speech and performance.', fit: 'contain', isNew: true },
+    { name: 'Pioneer DDJ-REV5 Controller', quantity: 'Available', image: '/images/Bigdunn%20Photos/equipment/Pioneer-DDJ-Rev5-Controller.jpeg', description: 'Performance DJ controller for polished, flexible music programming.', fit: 'contain', isNew: true },
   ]},
   { id: 'lighting', title: 'Lighting & Visual', Icon: Lightbulb, items: [
     { name: 'Wireless Uplights', quantity: '50', image: '/images/equipment/uplights.jpg', description: 'Battery-powered wireless uplights in various colors.' },
@@ -24,7 +27,7 @@ const categories: { id: string; title: string; Icon: typeof Mic; items: Item[] }
     { name: 'Intelligent Wash Lights', quantity: '4', image: '/images/equipment/wash-lights.jpg', description: 'Powerful wash lights for broad color coverage.' },
     { name: 'Lasers (10W)', quantity: '2', image: '/images/equipment/lasers.jpg', description: 'Professional laser systems for spectacular effects.' },
     { name: 'Waterproof Par Lights', quantity: '16', image: '/images/equipment/par-lights.jpeg', description: 'Weather-resistant PAR lights for outdoor events.' },
-    { name: 'LED Panels', quantity: '40', image: '/images/equipment/led-panels.jpg', description: 'Modular LED video wall panels.' },
+    { name: 'LED Panels', quantity: '40', image: '/images/equipment/led-panels.jpeg', description: 'Modular LED video wall panels.' },
     { name: 'Projectors', quantity: '3', image: '/images/equipment/projectors.jpeg', description: 'High-lumen projectors for large-scale displays.' },
     { name: 'Projector Screens', quantity: '2', image: '/images/equipment/screens.jpg', description: 'Professional projection screens up to 20x20.' },
   ]},
@@ -61,32 +64,33 @@ export default function EquipmentPage() {
   return (
     <>
       {/* HERO */}
-      <section className="relative overflow-hidden px-6" style={{ background: '#100c1c', paddingTop: '170px', paddingBottom: '140px' }}>
-        <div className="absolute pointer-events-none" style={{ top: '-140px', right: '-60px', width: '460px', height: '460px', borderRadius: '50%', background: 'radial-gradient(circle,rgba(106,38,201,0.4),transparent 70%)' }} />
-        <div className="absolute pointer-events-none" style={{ bottom: '-140px', left: '-80px', width: '400px', height: '400px', borderRadius: '50%', background: 'radial-gradient(circle,rgba(47,57,232,0.3),transparent 70%)' }} />
-        <div className="relative max-w-[1240px] mx-auto">
+      <section className="bd-page-hero">
+        <Image src="/images/Bigdunn%20Photos/concert-3.jpeg" alt="Big Dunn professional event production equipment" fill priority className="bd-page-hero-media" sizes="100vw" />
+        <div className="bd-container relative z-[1]">
           <div className="flex items-center gap-3.5 mb-[22px]">
             <span className="bd-kline" />
-            <span className="bd-kicker-light">Inventory</span>
+            <span className="bd-kicker-light">Production inventory</span>
           </div>
-          <h1 className="bd-display text-white m-0 mb-5" style={{ fontSize: 'clamp(30px,4.4vw,56px)', lineHeight: 1.12 }}>Equipment Inventory</h1>
-          <p className="font-light m-0" style={{ fontSize: 'clamp(16px,1.6vw,20px)', lineHeight: 1.6, color: '#c4bed5', maxWidth: '620px' }}>
-            Browse our comprehensive collection of professional-grade audio, lighting, staging, and event equipment.
-          </p>
+          <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+            <div><h1 className="bd-display text-white m-0 mb-5" style={{ fontSize: 'clamp(32px,4.8vw,62px)', lineHeight: 1.08 }}>Equipment, ready for the room.</h1><p className="font-light m-0" style={{ fontSize: 'clamp(16px,1.6vw,20px)', lineHeight: 1.7, color: '#c4bed5', maxWidth: '670px' }}>Professional audio, lighting, staging, visuals, power, furniture, and effects—available individually or as a coordinated production.</p></div>
+            <div className="bd-price-lockup shrink-0"><small>Rentals starting at</small><span className="bd-display text-[25px]">$200</span><span className="text-[11px] text-white/60">published generator rate</span></div>
+          </div>
         </div>
       </section>
 
-      {/* TOP CTA + CATEGORIES */}
-      <section className="px-6 pb-[88px]" style={{ background: '#f6f5fa' }}>
-        <div className="max-w-[1000px] mx-auto bd-cta-band px-11 py-[52px] text-center" style={{ transform: 'translateY(-72px)', marginBottom: '-40px', boxShadow: '0 30px 70px rgba(106,38,201,0.32)' }}>
-          <div className="relative">
-            <h2 className="bd-display text-white m-0 mb-3.5" style={{ fontSize: 'clamp(20px,2.4vw,30px)', lineHeight: 1.25 }}>Need Equipment for Your Event?</h2>
-            <p className="text-[16px] leading-[1.6] max-w-[520px] mx-auto mb-7" style={{ color: 'rgba(255,255,255,0.85)' }}>
-              Contact us for customized quotes based on your specific requirements. We&apos;ll help you select the perfect equipment mix.
-            </p>
-            <div className="flex gap-3.5 justify-center flex-wrap">
-              <Link href="/contact" className="bd-btn bd-btn-white bd-btn-sm">Request Quote<ArrowRight size={17} /></Link>
-              <a href="tel:+12424493010" className="bd-btn bd-btn-glass bd-btn-sm"><Phone size={17} />Call 1-242-449-3010</a>
+      {/* GENERATOR FEATURE + CATEGORIES */}
+      <section className="px-6 py-[88px]" style={{ background: '#f6f5fa' }}>
+        <div className="mx-auto mb-24 grid max-w-[1120px] overflow-hidden rounded-[24px] border border-line bg-dark shadow-[0_30px_70px_rgba(22,19,31,0.18)] lg:grid-cols-[0.8fr_1.2fr]">
+          <div className="bg-dark">
+            <Image src="/images/Bigdunn%20Photos/generator-rental.jpeg" alt="Big Dunn generator rental rates" width={1080} height={1350} sizes="(max-width: 1024px) 100vw, 45vw" className="h-auto w-full" />
+          </div>
+          <div className="flex flex-col justify-center p-8 md:p-12">
+            <span className="bd-kicker-light">Featured rental</span>
+            <h2 className="bd-display mb-7 mt-4 text-white" style={{ fontSize: 'clamp(24px,3vw,40px)' }}>Reliable power for events of every size.</h2>
+            <div>
+              <Link href="/quote?eventType=Generator%20Rental" className="bd-btn bd-btn-primary bd-btn-sm">
+                GET A QUOTE <ArrowRight size={16} />
+              </Link>
             </div>
           </div>
         </div>
@@ -104,7 +108,8 @@ export default function EquipmentPage() {
                 {cat.items.map((item, i) => (
                   <div key={i} className="bg-white rounded-[18px] overflow-hidden transition-all duration-[250ms] hover:-translate-y-1" style={{ border: '1px solid #ece9f3', boxShadow: '0 10px 26px rgba(22,19,31,0.05)' }}>
                     <div className="relative h-[220px]" style={{ background: '#f0eef6' }}>
-                      <div className="absolute inset-0" style={{ backgroundImage: `url('${item.image}')`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+                      <div className="absolute inset-0" style={{ backgroundImage: `url('${item.image}')`, backgroundSize: item.fit ?? 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }} />
+                      {item.isNew && <div className="absolute left-3.5 top-3.5 rounded-full bg-purple px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.12em] text-white">New</div>}
                       <div className="absolute top-3.5 right-3.5 text-white font-bold text-[12px] px-3.5 py-1.5 rounded-full" style={{ background: 'rgba(16,12,28,0.78)', backdropFilter: 'blur(4px)' }}>{item.quantity}</div>
                     </div>
                     <div className="p-6">
@@ -112,7 +117,7 @@ export default function EquipmentPage() {
                       <p className="text-[13.5px] leading-[1.6] text-body m-0 mb-[18px]">{item.description}</p>
                       <div className="flex items-center justify-between pt-4" style={{ borderTop: '1px solid #f0eef6' }}>
                         <span className="text-[12.5px] font-semibold text-purple">Available: {item.quantity}</span>
-                        <Link href="/contact" className="text-[13px] font-bold text-purple no-underline inline-flex items-center gap-1.5 hover:text-blue transition-colors">
+                        <Link href={`/quote?eventType=Equipment%20Rental&services=${encodeURIComponent(cat.title)}`} className="text-[13px] font-bold text-purple no-underline inline-flex items-center gap-1.5 hover:text-blue transition-colors">
                           Inquire<ArrowRight size={13} />
                         </Link>
                       </div>
@@ -151,7 +156,7 @@ export default function EquipmentPage() {
           </p>
           <div className="flex gap-3.5 justify-center flex-wrap">
             <Link href="/services/wedding-packages" className="bd-btn bd-btn-primary bd-btn-sm">Wedding Packages</Link>
-            <Link href="/services/event-packages" className="bd-btn bd-btn-outline bd-btn-sm">Event Packages</Link>
+            <Link href="/quote?eventType=Equipment%20Rental" className="bd-btn bd-btn-outline bd-btn-sm">Build Equipment Quote</Link>
           </div>
         </div>
       </section>

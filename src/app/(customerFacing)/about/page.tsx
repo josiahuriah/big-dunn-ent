@@ -4,7 +4,7 @@ import { Target, Eye, Heart, Medal, Users, Zap, ShieldCheck } from 'lucide-react
 export const metadata = {
   title: 'About Us - Big Dunn Entertainment | Nassau Event Equipment Experts',
   description:
-    "Learn about Big Dunn Entertainment, Nassau's premier event equipment rental company. Discover our story, mission, and commitment to creating unforgettable events.",
+    "Learn about Big Dunn Entertainment, a Bahamian event production and equipment rental company serving weddings, concerts, corporate events, and celebrations.",
 };
 
 export default function AboutPage() {
@@ -21,7 +21,7 @@ export default function AboutPage() {
     { year: '2014', title: 'The Beginning', desc: 'Founded by Glenn Williams Jr. with a vision to revolutionize event entertainment in Nassau.' },
     { year: '2016', title: 'Major Expansion', desc: 'Invested in professional-grade RCF audio systems and intelligent lighting equipment.' },
     { year: '2019', title: 'Industry Leader', desc: "Became Nassau's go-to provider for large-scale concerts and corporate events." },
-    { year: '2024', title: 'Today', desc: 'Serving 500+ events annually with cutting-edge equipment and exceptional service.' },
+    { year: '2024', title: 'Today', desc: 'A growing production team with more than 500 events delivered.' },
   ];
 
   return (
@@ -67,7 +67,7 @@ export default function AboutPage() {
                 concert — deserves the same dedication, precision, and professional excellence.
               </p>
               <p className="m-0">
-                Today, we&apos;re proud to serve over 500 events annually, from elegant weddings at premier venues to high-energy
+                Today, we&apos;re proud to have delivered more than 500 events, from elegant weddings at leading venues to high-energy
                 concerts and corporate galas.
               </p>
             </div>
@@ -228,7 +228,7 @@ export default function AboutPage() {
             <p className="text-[18px] leading-[1.6] max-w-[520px] mx-auto mb-[34px]" style={{ color: 'rgba(255,255,255,0.82)' }}>
               Experience the Big Dunn difference for your next event.
             </p>
-            <Link href="/contact" className="bd-btn bd-btn-white">Get In Touch</Link>
+            <Link href="/quote" className="bd-btn bd-btn-white">Build a Quote — Starting at $250</Link>
           </div>
         </div>
       </section>

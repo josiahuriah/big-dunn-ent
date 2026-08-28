@@ -1,7 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { MapPin, Phone, Mail, Clock, Send, CheckCircle } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { MapPin, Phone, Mail, Clock, Send, CheckCircle, ArrowRight } from 'lucide-react';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -45,7 +47,7 @@ export default function ContactPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const eventTypes = ['Wedding', 'Concert', 'Corporate Event', 'Birthday Party', 'Festival', 'Private Party', 'Other'];
+  const eventTypes = ['Wedding', 'Concert', 'Corporate Event', 'Birthday Party', 'Festival', 'Private Party', 'Equipment Rental', 'Generator Rental', 'Other'];
 
   const contacts = [
     { Icon: MapPin, title: 'Location', details: ['Carew Street', 'Nassau, Bahamas'], link: 'https://maps.google.com/?q=Carew+Street+Nassau+Bahamas' },
@@ -65,20 +67,19 @@ export default function ContactPage() {
   return (
     <>
       {/* HERO */}
-      <section className="relative overflow-hidden px-6" style={{ background: '#100c1c', paddingTop: '170px', paddingBottom: '150px' }}>
-        <div className="absolute pointer-events-none" style={{ top: '-140px', right: '-60px', width: '460px', height: '460px', borderRadius: '50%', background: 'radial-gradient(circle,rgba(106,38,201,0.4),transparent 70%)' }} />
-        <div className="absolute pointer-events-none" style={{ bottom: '-140px', left: '-80px', width: '400px', height: '400px', borderRadius: '50%', background: 'radial-gradient(circle,rgba(47,57,232,0.3),transparent 70%)' }} />
-        <div className="relative max-w-[1240px] mx-auto text-center">
+      <section className="bd-page-hero min-h-[540px]">
+        <Image src="/images/Bigdunn%20Photos/exlusive-setup.jpeg" alt="Big Dunn private event production" fill priority className="bd-page-hero-media" sizes="100vw" />
+        <div className="bd-container relative z-[1] text-center">
           <div className="flex items-center justify-center gap-3.5 mb-[22px]">
             <span style={{ height: '2px', width: '44px', background: 'linear-gradient(90deg,transparent,#6a26c9)' }} />
             <span className="bd-kicker-light">Get In Touch</span>
             <span style={{ height: '2px', width: '44px', background: 'linear-gradient(90deg,#2f39e8,transparent)' }} />
           </div>
           <h1 className="bd-display text-white m-0 mb-5" style={{ fontSize: 'clamp(32px,4.6vw,60px)', lineHeight: 1.12 }}>
-            Let&apos;s Talk
+            Talk to the Team
           </h1>
           <p className="font-light m-0 mx-auto" style={{ fontSize: 'clamp(16px,1.6vw,20px)', lineHeight: 1.6, color: '#c4bed5', maxWidth: '560px' }}>
-            Let&apos;s start planning your unforgettable event.
+            Ask a quick question, call us directly, or use the Quote Builder for a detailed production request.
           </p>
         </div>
       </section>
@@ -105,18 +106,23 @@ export default function ContactPage() {
           ))}
         </div>
 
+        <div className="max-w-[1240px] mx-auto mb-12 grid gap-6 rounded-[22px] border border-line bg-white p-7 shadow-[0_16px_42px_rgba(22,19,31,0.07)] md:grid-cols-[1fr_auto] md:items-center md:p-9">
+          <div><div className="text-[10.5px] font-bold uppercase tracking-[0.18em] text-purple">Packages starting at $250</div><h2 className="bd-display mb-2 mt-3 text-[21px] text-ink">Have event details ready?</h2><p className="m-0 text-[14px] leading-[1.65] text-body">The guided Quote Builder captures your package, services, venue, timing, budget, and logistics in one request.</p></div>
+          <Link href="/quote" className="bd-btn bd-btn-primary">Build a detailed quote <ArrowRight size={16} /></Link>
+        </div>
+
         <div className="max-w-[1240px] mx-auto grid lg:grid-cols-[1.15fr_1fr] gap-14">
           {/* Form */}
           <div>
             <div className="flex items-center gap-3.5 mb-4">
               <span className="bd-kline" />
-              <span className="bd-kicker">Request a Quote</span>
+              <span className="bd-kicker">Quick inquiry</span>
             </div>
             <h2 className="bd-display text-ink m-0 mb-3.5" style={{ fontSize: 'clamp(24px,2.6vw,34px)', lineHeight: 1.2 }}>
-              Free Quote
+              Send a Message
             </h2>
             <p className="text-[15.5px] leading-[1.7] text-body m-0 mb-8">
-              Fill out the form and we&apos;ll get back to you within 24 hours with a customized quote for your event.
+              Use this short form for general questions. For pricing and production requirements, use the detailed Quote Builder above.
             </p>
 
             {submitStatus === 'success' && (

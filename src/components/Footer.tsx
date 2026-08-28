@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { MapPin, Phone, Mail, Facebook, Instagram, Twitter } from "lucide-react";
 
 export default function Footer() {
@@ -7,10 +8,12 @@ export default function Footer() {
   const explore = [
     { href: "/", label: "Home" },
     { href: "/about", label: "About Us" },
+    { href: "/services", label: "Services" },
+    { href: "/events", label: "Events" },
     { href: "/services/wedding-packages", label: "Wedding Packages" },
     { href: "/services/event-packages", label: "Event Packages" },
     { href: "/services/equipment", label: "Equipment" },
-    { href: "/contact", label: "Contact" },
+    { href: "/quote", label: "Build a Quote" },
   ];
 
   return (
@@ -22,12 +25,9 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr_1.2fr] gap-14">
           {/* Brand */}
           <div>
-            <Link href="/" className="inline-flex items-baseline gap-3 no-underline">
-              <span className="bd-display text-white text-[26px] tracking-[0.02em] leading-none">BIG DUNN</span>
+            <Link href="/" className="inline-flex no-underline">
+              <Image src="/images/logo-long.png" alt="Big Dunn Entertainment" width={1200} height={200} className="h-11 w-auto brightness-0 invert" />
             </Link>
-            <div className="mt-2.5 mb-1 text-[12px] font-bold tracking-[0.42em]" style={{ color: "#8b7fd6" }}>
-              ENTERTAINMENT
-            </div>
             <div className="flex items-center gap-2.5 mt-1.5 mb-[22px]">
               <span style={{ height: "1px", width: "34px", background: "linear-gradient(90deg,transparent,#6a26c9)" }} />
               <span className="italic text-[12.5px] tracking-[0.24em]" style={{ color: "#6a26c9" }}>
@@ -35,8 +35,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-sm leading-[1.7] max-w-[320px] m-0" style={{ color: "#9a94ac" }}>
-              Nassau&apos;s premier event equipment and entertainment company — professional audio, lighting, staging
-              and production for weddings, concerts and corporate events across The Bahamas.
+              One production partner for professional audio, lighting, staging, visuals, power, and event rentals across The Bahamas.
             </p>
           </div>
 

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { CheckCircle, ArrowRight, Music, Phone, Mail } from 'lucide-react';
 
 export const metadata = {
@@ -17,7 +18,7 @@ const packages = [
 const services = [
   { title: 'Expert Setup', desc: 'Professional installation and sound check by experienced technicians.' },
   { title: 'On-Site Support', desc: 'Dedicated engineer throughout your event to ensure perfect audio.' },
-  { title: 'Equipment Insurance', desc: 'All equipment fully insured and maintained to the highest standards.' },
+  { title: 'Maintained Inventory', desc: 'Professional equipment prepared and tested for the confirmed production scope.' },
 ];
 
 export default function EventPackagesPage() {
@@ -26,21 +27,14 @@ export default function EventPackagesPage() {
   return (
     <>
       {/* HERO */}
-      <section className="relative overflow-hidden px-6" style={{ background: '#100c1c', paddingTop: '170px', paddingBottom: '96px' }}>
-        <div className="absolute pointer-events-none" style={{ top: '-140px', left: '-60px', width: '460px', height: '460px', borderRadius: '50%', background: 'radial-gradient(circle,rgba(47,57,232,0.4),transparent 70%)' }} />
-        <div className="absolute pointer-events-none" style={{ bottom: '-140px', right: '-80px', width: '400px', height: '400px', borderRadius: '50%', background: 'radial-gradient(circle,rgba(106,38,201,0.32),transparent 70%)' }} />
-        <div className="relative max-w-[1240px] mx-auto">
+      <section className="bd-page-hero">
+        <Image src="/images/Bigdunn%20Photos/concert-2.jpeg" alt="Big Dunn concert stage production" fill priority className="bd-page-hero-media" sizes="100vw" />
+        <div className="bd-container relative z-[1]">
           <div className="flex items-center gap-3.5 mb-[22px]">
             <span style={{ display: 'block', height: '2px', width: '44px', borderRadius: '2px', background: 'linear-gradient(90deg,#2f39e8,#6a26c9)' }} />
             <span className="bd-kicker-light">Concerts &amp; Events</span>
           </div>
-          <h1 className="bd-display text-white m-0 mb-5 flex items-center gap-4 flex-wrap" style={{ fontSize: 'clamp(28px,4.2vw,54px)', lineHeight: 1.12 }}>
-            <Music size={40} className="text-purple-soft" />
-            Concert &amp; Event Packages
-          </h1>
-          <p className="font-light m-0" style={{ fontSize: 'clamp(16px,1.6vw,20px)', lineHeight: 1.6, color: '#c4bed5', maxWidth: '640px' }}>
-            Professional audio-visual production for unforgettable concerts, festivals, and large-scale celebrations.
-          </p>
+          <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between"><div><h1 className="bd-display text-white m-0 mb-5 flex items-center gap-4 flex-wrap" style={{ fontSize: 'clamp(30px,4.6vw,60px)', lineHeight: 1.08 }}><Music size={40} className="text-purple-soft" />Concert &amp; Event Packages</h1><p className="font-light m-0" style={{ fontSize: 'clamp(16px,1.6vw,20px)', lineHeight: 1.7, color: '#c4bed5', maxWidth: '670px' }}>Scalable audio, lighting, staging, video, power, and technical support for live audiences across The Bahamas.</p></div><div className="bd-price-lockup shrink-0"><small>Starting at</small><span className="bd-display text-[25px]">$5,170</span><span className="text-[11px] text-white/60">Core package</span></div></div>
         </div>
       </section>
 
@@ -105,12 +99,12 @@ export default function EventPackagesPage() {
                     </div>
                   </div>
                   <div className="mt-[30px] pt-6 flex flex-col gap-3" style={{ borderTop: '1px solid #f0eef6' }}>
-                    <Link href="/contact" className="bd-btn bd-btn-gradient bd-btn-block !py-[15px] text-[13.5px]">
+                    <Link href={`/quote?eventType=Concert&package=${encodeURIComponent(pkg.name)}`} className="bd-btn bd-btn-gradient bd-btn-block !py-[15px] text-[13.5px]">
                       Book {pkg.name}
                       <ArrowRight size={17} />
                     </Link>
                     <div className="grid grid-cols-2 gap-3">
-                      <Link href="/contact" className="bd-btn bd-btn-outline !py-3 text-[13px]">Get Quote</Link>
+                      <Link href={`/quote?eventType=Concert&package=${encodeURIComponent(pkg.name)}`} className="bd-btn bd-btn-outline !py-3 text-[13px]">Get Quote</Link>
                       <Link href="/services/equipment" className="text-center font-bold text-[13px] no-underline py-3 rounded-[10px] transition-all hover:!border-purple hover:!text-purple" style={{ color: '#5b566b', border: '1px solid #dcd8e6' }}>View Equipment</Link>
                     </div>
                   </div>
@@ -120,6 +114,15 @@ export default function EventPackagesPage() {
           </section>
         );
       })}
+
+      <section className="bg-white px-6 py-[88px]">
+        <div className="max-w-[1240px] mx-auto">
+          <div className="mb-10"><span className="bd-kicker">Recent production</span><h2 className="bd-display mb-0 mt-4 text-ink" style={{ fontSize: 'clamp(25px,3vw,40px)' }}>See the system working as one.</h2></div>
+          <div className="grid auto-rows-[230px] gap-5 md:grid-cols-3 md:auto-rows-[330px]">
+            {['concert-1.jpeg', 'concert-4.jpeg', 'concert-5.jpeg'].map((photo, index) => <div key={photo} className={`relative overflow-hidden rounded-[20px] ${index === 0 ? 'md:col-span-2' : ''}`}><Image src={`/images/Bigdunn%20Photos/${photo}`} alt={`Big Dunn concert production example ${index + 1}`} fill sizes={index === 0 ? '(max-width: 767px) 100vw, 66vw' : '(max-width: 767px) 100vw, 33vw'} className="object-cover" /></div>)}
+          </div>
+        </div>
+      </section>
 
       {/* SERVICE INCLUDED */}
       <section className="relative overflow-hidden px-6 py-[88px]" style={{ background: '#100c1c' }}>
@@ -148,7 +151,7 @@ export default function EventPackagesPage() {
               Planning a unique event or need specialized equipment? We create custom packages tailored to your requirements, venue, and budget — from multi-day festivals to corporate product launches.
             </p>
             <div className="flex gap-3.5 justify-center flex-wrap">
-              <Link href="/contact" className="bd-btn bd-btn-white bd-btn-sm">Request Custom Quote</Link>
+              <Link href="/quote?eventType=Concert" className="bd-btn bd-btn-white bd-btn-sm">Request Custom Quote</Link>
               <Link href="/services/equipment" className="bd-btn bd-btn-glass bd-btn-sm">Browse Equipment</Link>
             </div>
           </div>
@@ -157,12 +160,12 @@ export default function EventPackagesPage() {
 
       {/* CONTACT CTA */}
       <section className="px-6 py-20" style={{ background: '#100c1c' }}>
-        <div className="max-w-[1100px] mx-auto grid md:grid-cols-[1.1fr_1fr] gap-12 items-center">
+        <div className="max-w-[1100px] min-w-0 mx-auto grid md:grid-cols-[1.1fr_1fr] gap-12 items-center">
           <div>
             <h3 className="bd-display text-white m-0 mb-3.5" style={{ fontSize: 'clamp(22px,2.6vw,32px)', lineHeight: 1.25 }}>Let&apos;s Make Your Event Legendary</h3>
             <p className="text-[17px] leading-[1.6] m-0" style={{ color: '#b6afc9' }}>Our production team is ready to bring your concert or event vision to life.</p>
           </div>
-          <div className="flex flex-col gap-3.5">
+          <div className="flex min-w-0 flex-col gap-3.5">
             <a href="tel:+12424493010" className="flex items-center gap-4 px-6 py-5 rounded-[14px] no-underline transition-all hover:!border-purple" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)' }}>
               <Phone size={26} style={{ color: '#8b7fd6' }} />
               <div>
@@ -174,7 +177,7 @@ export default function EventPackagesPage() {
               <Mail size={26} style={{ color: '#8b7fd6' }} />
               <div>
                 <div className="text-[12.5px]" style={{ color: '#b6afc9' }}>Email us</div>
-                <div className="text-[15px] font-bold text-white">info@bigdunnentertainment.com</div>
+                <div className="break-all text-[15px] font-bold text-white">info@bigdunnentertainment.com</div>
               </div>
             </a>
           </div>

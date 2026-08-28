@@ -4,8 +4,8 @@ Next.js website for Big Dunn Entertainment. Website quote requests, newsletter s
 
 ## HubSpot behavior
 
-- Quote requests create or update a contact and add the complete event request to its timeline.
-- When a deal pipeline and stage are configured, a quote request also creates an associated deal.
+- Quote requests create or update a contact and create an associated sales deal when the pipeline IDs are configured.
+- The complete Quote Builder summary is saved in the deal Description and in an activity note associated with both the deal and contact. A selected published package is also written to the deal Amount as a starting estimate.
 - Newsletter signups create or update a contact and record explicit email consent against the configured HubSpot subscription type.
 - Reviews create or update a contact and add the review to its timeline.
 - HubSpot credentials are used only by server-side route handlers and are never exposed to the browser.

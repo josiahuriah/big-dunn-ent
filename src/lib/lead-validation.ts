@@ -7,8 +7,23 @@ export const EVENT_TYPES = [
   'Birthday Party',
   'Festival',
   'Private Party',
+  'Equipment Rental',
+  'Generator Rental',
   'Other',
 ] as const;
+
+export const QUOTE_SERVICE_OPTIONS = [
+  'Audio',
+  'Lighting',
+  'Staging',
+  'Visuals',
+  'Power',
+  'Event Rentals',
+  'DJ Services',
+  'Special Effects',
+] as const;
+
+export const CONTACT_PREFERENCES = ['Phone', 'Email', 'WhatsApp', 'No preference'] as const;
 
 function isValidDate(value: string) {
   if (value === '') return true;
@@ -36,6 +51,18 @@ export const quoteLeadSchema = z.object({
     .refine((value) => value === '' || /^[1-9]\d{0,4}$/.test(value), 'Enter a valid guest count')
     .default(''),
   message: z.string().trim().min(10).max(3000),
+  eventTime: z.string().trim().max(20).default(''),
+  setupTime: z.string().trim().max(20).default(''),
+  venue: z.string().trim().max(160).default(''),
+  island: z.string().trim().max(100).default(''),
+  services: z.array(z.enum(QUOTE_SERVICE_OPTIONS)).max(QUOTE_SERVICE_OPTIONS.length).default([]),
+  addOns: z.array(z.string().trim().min(1).max(100)).max(12).default([]),
+  packageName: z.string().trim().max(120).default(''),
+  budget: z.string().trim().max(80).default(''),
+  contactPreference: z.enum(CONTACT_PREFERENCES).optional(),
+  referralSource: z.string().trim().max(120).default(''),
+  estimatedTotal: z.number().finite().nonnegative().max(1_000_000).optional(),
+  pricingNote: z.string().trim().max(500).default(''),
   website: z.string().max(200).optional().default(''),
 });
 
