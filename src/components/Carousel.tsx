@@ -6,13 +6,6 @@ import Link from 'next/link';
 
 interface CarouselSlide {
   image: string;
-  kicker: string;
-  title: string;
-  subtitle: string;
-  cta: {
-    text: string;
-    href: string;
-  };
 }
 
 interface CarouselProps {
@@ -29,8 +22,6 @@ export default function Carousel({ slides, autoPlayInterval = 6000 }: CarouselPr
     const timer = setInterval(() => setCurrent((c) => (c + 1) % slides.length), autoPlayInterval);
     return () => clearInterval(timer);
   }, [slides.length, autoPlayInterval]);
-
-  const slide = slides[current];
 
   return (
     <section className="relative w-full overflow-hidden" style={{ height: '100vh', minHeight: '640px', background: '#100c1c' }}>
@@ -60,30 +51,26 @@ export default function Carousel({ slides, autoPlayInterval = 6000 }: CarouselPr
 
       {/* Content */}
       <div className="relative z-[5] h-full max-w-[1240px] mx-auto px-6 flex flex-col justify-center">
-        <div className="max-w-[760px]" key={current}>
-          <div className="flex items-center gap-3.5 mb-[22px] animate-fadeIn">
-            <span className="bd-kline" />
-            <span className="bd-kicker-light">{slide.kicker}</span>
-          </div>
+        <div className="max-w-[850px]">
           <h1
-            className="bd-display text-white m-0 mb-6 animate-fadeIn"
+            className="bd-display text-white m-0 mb-6"
             style={{ fontSize: 'clamp(30px,4.4vw,58px)', lineHeight: 1.14, textWrap: 'balance' }}
           >
-            {slide.title}
+            Big Dunn Entertainment
           </h1>
           <p
-            className="font-light m-0 mb-9 animate-fadeIn"
+            className="font-light m-0 mb-9"
             style={{ fontSize: 'clamp(16px,1.5vw,20px)', lineHeight: 1.6, color: '#d9d4e6', maxWidth: '560px' }}
           >
-            {slide.subtitle}
+            Big Moments. Built Right.
           </p>
-          <div className="flex gap-4 flex-wrap animate-fadeIn">
-            <Link href={slide.cta.href} className="bd-btn bd-btn-primary">
-              {slide.cta.text}
+          <div className="flex gap-4 flex-wrap">
+            <Link href="/quote" className="bd-btn bd-btn-primary">
+              Get a quote
               <ArrowRight size={16} />
             </Link>
-            <Link href="/services/equipment" className="bd-btn bd-btn-outline-light">
-              Explore Equipment
+            <Link href="/services" className="bd-btn bd-btn-outline-light">
+              View services &amp; pricing
             </Link>
           </div>
         </div>
