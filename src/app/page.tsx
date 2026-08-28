@@ -78,20 +78,21 @@ export default function HomePage() {
           </div>
 
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {services.map((service, index) => (
+            {services.map((service) => (
               <Link
                 key={service.slug}
                 href={`/services/${service.slug}`}
                 className="bd-image-card group min-h-[430px]"
               >
                 <Image
-                  src={service.image}
+                  src={service.slug === 'generator-rentals'
+                    ? '/images/Bigdunn%20Photos/generator-rental-clean.webp'
+                    : service.image}
                   alt=""
                   fill
                   sizes="(max-width: 767px) 100vw, (max-width: 1100px) 50vw, 33vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                 />
-                <span className="bd-image-card-index">0{index + 1}</span>
                 <div className="bd-image-card-overlay" />
                 <div className="relative z-[2] mt-auto p-7">
                   <div className="mb-3 text-[11px] font-bold uppercase tracking-[0.2em] text-purple-soft">

@@ -23,11 +23,10 @@ export default function ServicesPage() {
       <section className="bd-section bg-alt">
         <div className="bd-container">
           <div className="grid gap-6 md:grid-cols-2">
-            {services.map((service, index) => (
+            {services.map((service) => (
               <Link key={service.slug} href={`/services/${service.slug}`} className="group grid overflow-hidden rounded-[22px] border border-line bg-white text-ink no-underline shadow-[0_16px_42px_rgba(22,19,31,0.07)] transition-all hover:-translate-y-1 hover:text-ink md:grid-cols-[0.82fr_1.18fr]">
                 <div className="relative min-h-[280px] overflow-hidden">
                   <Image src={service.image} alt="" fill sizes="(max-width: 767px) 100vw, 42vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.04]" />
-                  <span className="absolute left-5 top-5 rounded-full border border-white/25 bg-dark/65 px-3 py-1.5 font-michroma text-[10px] text-white backdrop-blur-md">0{index + 1}</span>
                 </div>
                 <div className="flex flex-col justify-center p-7 md:p-9">
                   <div className="mb-3 text-[10.5px] font-extrabold uppercase tracking-[0.19em] text-purple">Starting at {formatPrice(service.startingAt)}</div>
